@@ -18,11 +18,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin labo.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:labo.tmx
-
 #begin labtilesetfinishedtransparent.png
 /importer:TextureImporter
 /processor:TextureProcessor

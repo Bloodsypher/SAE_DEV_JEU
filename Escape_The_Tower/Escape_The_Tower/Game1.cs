@@ -64,7 +64,7 @@ namespace Escape_The_Tower
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
             _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
-            _perso.Update(deltaSeconds); // time écoulé
+            
 
 
 
@@ -75,7 +75,7 @@ namespace Escape_The_Tower
             if (_keyboardState.IsKeyDown(Keys.D) && !_keyboardState.IsKeyDown(Keys.Q))
             {
               _perso.Play("walkEast");
-                _perso.Update(deltaSeconds); // time écoulé
+              
                 _positionPerso.X = _positionPerso.X + _vitessePerso;
             }
 
@@ -83,7 +83,7 @@ namespace Escape_The_Tower
             if (_keyboardState.IsKeyDown(Keys.Q) && !_keyboardState.IsKeyDown(Keys.D))
             {
               _perso.Play("walkWest");
-               _perso.Update(deltaSeconds);
+              
                 _positionPerso.X = _positionPerso.X - _vitessePerso;
             }
 
@@ -99,7 +99,7 @@ namespace Escape_The_Tower
             if (_keyboardState.IsKeyDown(Keys.Z) && !_keyboardState.IsKeyDown(Keys.S))
             {
                 _perso.Play("walkNorth");
-               _perso.Update(deltaSeconds);
+               
                 _positionPerso.Y = _positionPerso.Y - _vitessePerso;
             }
 
@@ -127,6 +127,7 @@ namespace Escape_The_Tower
                 _positionPerso.Y = _positionPerso.Y - _vitessePerso;
                 _positionPerso.X = _positionPerso.X - _vitessePerso;
             }
+            _perso.Update(deltaSeconds); // time écouléd
 
             base.Update(gameTime);
         }

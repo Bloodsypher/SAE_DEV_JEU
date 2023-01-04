@@ -52,8 +52,8 @@ namespace Escape_The_Tower
             // TODO: use this.Content to load your game content here
             _tiledMap = Content.Load<TiledMap>("tutolab");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-    //        SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-          //  _perso = new AnimatedSprite(spriteSheet);
+           SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+          _perso = new AnimatedSprite(spriteSheet);
         }
 
         protected override void Update(GameTime gameTime)
@@ -63,8 +63,8 @@ namespace Escape_The_Tower
 
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-          //  _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
-         //   _perso.Update(deltaSeconds); // time écoulé
+            _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
+            _perso.Update(deltaSeconds); // time écoulé
 
 
 
@@ -74,32 +74,32 @@ namespace Escape_The_Tower
             // si fleche droite
             if (_keyboardState.IsKeyDown(Keys.D) && !_keyboardState.IsKeyDown(Keys.Q))
             {
-             //   _perso.Play("walkEast");
-               // _perso.Update(deltaSeconds); // time écoulé
+              _perso.Play("walkEast");
+                _perso.Update(deltaSeconds); // time écoulé
                 _positionPerso.X = _positionPerso.X + _vitessePerso;
             }
 
             // si fleche gauchee
             if (_keyboardState.IsKeyDown(Keys.Q) && !_keyboardState.IsKeyDown(Keys.D))
             {
-              //  _perso.Play("walkWest");
-              //  _perso.Update(deltaSeconds);
+              _perso.Play("walkWest");
+               _perso.Update(deltaSeconds);
                 _positionPerso.X = _positionPerso.X - _vitessePerso;
             }
 
             //si fleche bas
             if (_keyboardState.IsKeyDown(Keys.S) && !_keyboardState.IsKeyDown(Keys.Z))
             {
-               // _perso.Play("walkSouth");
-              //  _perso.Update(deltaSeconds);
+               _perso.Play("walkSouth");
+               _perso.Update(deltaSeconds);
                 _positionPerso.Y = _positionPerso.Y + _vitessePerso;
             }
 
             //si fleche haut
             if (_keyboardState.IsKeyDown(Keys.Z) && !_keyboardState.IsKeyDown(Keys.S))
             {
-                //_perso.Play("walkNorth");
-               // _perso.Update(deltaSeconds);
+                _perso.Play("walkNorth");
+               _perso.Update(deltaSeconds);
                 _positionPerso.Y = _positionPerso.Y - _vitessePerso;
             }
 
@@ -139,7 +139,7 @@ namespace Escape_The_Tower
 
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
-          //  _spriteBatch.Draw(_perso, _positionPerso);
+          _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

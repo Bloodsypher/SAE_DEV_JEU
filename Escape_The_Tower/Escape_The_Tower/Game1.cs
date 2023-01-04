@@ -50,7 +50,7 @@ namespace Escape_The_Tower
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _tiledMap = Content.Load<TiledMap>("labo");
+            _tiledMap = Content.Load<TiledMap>("tutolab");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
     //        SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
           //  _perso = new AnimatedSprite(spriteSheet);

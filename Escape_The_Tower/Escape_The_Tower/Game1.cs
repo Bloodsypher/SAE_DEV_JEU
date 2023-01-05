@@ -28,7 +28,10 @@ namespace Escape_The_Tower
         private TiledMapTileLayer mapLayerPlaques;
         private int _sensPersoX;
         private int _sensPersoY;
-
+        private Vector2 _origin;
+        private int sprite_width;
+        private int sprite_height;
+        private Vector2 _rotation;
         public Game1()
         {
           
@@ -41,15 +44,31 @@ namespace Escape_The_Tower
         {
             // TODO: Add your initialization logic here
 
+
+            //---------------------------
+            //MODE PLEINE ECRAN
+            //---------------------------
+
+            //int w = graphics.DisplayMode.Width;
+            //int h = graphics.DisplayMode.Height;
+
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             _vitessePerso = 100;
 
-            _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN/2);
+            //---------------------------
+            //Initialise perso
+            //---------------------------
 
-            _graphics.IsFullScreen = true;
+            _origin = new Vector2(sprite_width / 2, sprite_height / 2);
+            _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN/2);
+            _rotation = new Vector2(0, 0);
+
+            
+            
             base.Initialize();
         }
 
@@ -68,8 +87,11 @@ namespace Escape_The_Tower
             mapLayerButton = _tiledMap.GetLayer<TiledMapTileLayer>("button");
             mapLayerPlaques = _tiledMap.GetLayer<TiledMapTileLayer>("plaques");
 
+
+            //définition des animation
+
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-          _perso = new AnimatedSprite(spriteSheet);
+            _perso = new AnimatedSprite(spriteSheet);
         }
 
         protected override void Update(GameTime gameTime)
@@ -98,8 +120,8 @@ namespace Escape_The_Tower
                 ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
                 ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
 
-                ushort txHaut = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
-                ushort tyHaut = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
+                ushort txHaut = (ushort)(_positionPerso.X + sprite_width/2 / _tiledMap.TileWidth +0.5);
+                ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height/2/ _tiledMap.TileHeight +0.5);
 
                 ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
                 ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
@@ -176,7 +198,7 @@ namespace Escape_The_Tower
 
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_perso, _positionPerso/*, null, Color.White, 0, _origin, _rotation ,SpriteEffects.None, 0*/);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

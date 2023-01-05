@@ -150,10 +150,10 @@ namespace Escape_The_Tower
             if (_sensPersoX == 0 && _sensPersoY == 0) _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
 
             // si on bouge alors on play anim
-            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso.Play("walkSouth");
-            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso.Play("walkNorth");
-            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso.Play("walkWest");
-            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso.Play("walkEast");
+           else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso.Play("walkSouth");
+           else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso.Play("walkNorth");
+           else if (_sensPersoX == -1 && _sensPersoY == 0) _perso.Play("walkWest");
+           else if (_sensPersoX == 1 && _sensPersoY == 0) _perso.Play("walkEast");
 
             _perso.Update(deltaTime); // time écoulé
             base.Update(gameTime);

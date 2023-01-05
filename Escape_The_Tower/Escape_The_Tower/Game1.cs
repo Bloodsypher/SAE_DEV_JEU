@@ -44,7 +44,7 @@ namespace Escape_The_Tower
 
             _vitessePerso = 100;
 
-            _positionPerso = new Vector2(20, 240);
+            _positionPerso = new Vector2(500, 240);
 
             _graphics.IsFullScreen = true;
             base.Initialize();

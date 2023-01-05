@@ -28,6 +28,7 @@ namespace Escape_The_Tower
 
         public Game1()
         {
+          
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -167,7 +168,7 @@ namespace Escape_The_Tower
 
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
-          _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

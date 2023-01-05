@@ -44,7 +44,7 @@ namespace Escape_The_Tower
 
             _vitessePerso = 100;
 
-            _positionPerso = new Vector2(500, 240);
+            _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN/2);
 
             _graphics.IsFullScreen = true;
             base.Initialize();
@@ -76,73 +76,15 @@ namespace Escape_The_Tower
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            /*
+            
             //DEPLACEMENT PERSO1
-            _keyboardState = Keyboard.GetState();
-
-            // si fleche droite
-            if (_keyboardState.IsKeyDown(Keys.D) && !_keyboardState.IsKeyDown(Keys.Q))
-            {
-              _perso.Play("walkEast");
-              
-                _positionPerso.X = _positionPerso.X + _vitessePerso;
-            }
-
-            // si fleche gauchee
-            if (_keyboardState.IsKeyDown(Keys.Q) && !_keyboardState.IsKeyDown(Keys.D))
-            {
-              _perso.Play("walkWest");
-              
-                _positionPerso.X = _positionPerso.X - _vitessePerso;
-            }
-
-            //si fleche bas
-            if (_keyboardState.IsKeyDown(Keys.S) && !_keyboardState.IsKeyDown(Keys.Z))
-            {
-               _perso.Play("walkSouth");
-               _perso.Update(deltaSeconds);
-                _positionPerso.Y = _positionPerso.Y + _vitessePerso;
-            }
-
-            //si fleche haut
-            if (_keyboardState.IsKeyDown(Keys.Z) && !_keyboardState.IsKeyDown(Keys.S))
-            {
-                _perso.Play("walkNorth");
-               
-                _positionPerso.Y = _positionPerso.Y - _vitessePerso;
-            }
-
-            //combinaison de touche pour pas bouger
-            if (_keyboardState.IsKeyDown(Keys.Z) && _keyboardState.IsKeyDown(Keys.D))
-            {
-                _positionPerso.Y = _positionPerso.Y + _vitessePerso;
-                _positionPerso.X = _positionPerso.X - _vitessePerso;
-            }
-
-            if (_keyboardState.IsKeyDown(Keys.Z) && _keyboardState.IsKeyDown(Keys.Q))
-            {
-                _positionPerso.Y = _positionPerso.Y + _vitessePerso;
-                _positionPerso.X = _positionPerso.X + _vitessePerso;
-            }
-
-            if (_keyboardState.IsKeyDown(Keys.S) && _keyboardState.IsKeyDown(Keys.Q))
-            {
-                _positionPerso.Y = _positionPerso.Y - _vitessePerso;
-                _positionPerso.X = _positionPerso.X + _vitessePerso;
-            }
-
-            if (_keyboardState.IsKeyDown(Keys.S) && _keyboardState.IsKeyDown(Keys.D))
-            {
-                _positionPerso.Y = _positionPerso.Y - _vitessePerso;
-                _positionPerso.X = _positionPerso.X - _vitessePerso;
-            }
-            */
+           
             _keyboardState = Keyboard.GetState();
             _sensPersoX = 0;
             _sensPersoY = 0;
 
-            // si fleche droite enfoncé
-            if (_keyboardState.IsKeyDown(Keys.D))
+            // si fleche D enfoncé
+            if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)))
             {
                 Console.WriteLine("dzd");
                 ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
@@ -158,7 +100,7 @@ namespace Escape_The_Tower
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = 1;
             }
-            // si fleche gauche enfoncé
+            // si fleche Q enfoncé
             if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)))
             {
                 ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
@@ -174,7 +116,7 @@ namespace Escape_The_Tower
                     _sensPersoX = -1;
             }
 
-            // si fleche haut enfoncé
+            // si fleche Z enfoncé
             if (_keyboardState.IsKeyDown(Keys.Z) && !(_keyboardState.IsKeyDown(Keys.S)))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
@@ -188,7 +130,7 @@ namespace Escape_The_Tower
                     _sensPersoY = -1;
             }
 
-            // si fleche bas enfoncé
+            // si fleche S enfoncé
             if (_keyboardState.IsKeyDown(Keys.S) && !(_keyboardState.IsKeyDown(Keys.Z)))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);

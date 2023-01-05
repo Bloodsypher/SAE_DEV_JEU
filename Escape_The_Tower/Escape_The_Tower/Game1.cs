@@ -20,7 +20,6 @@ namespace Escape_The_Tower
         private AnimatedSprite _perso;
         private KeyboardState _keyboardState;
         private int _vitessePerso;
-        private float deltaSeconds;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 900;
         private TiledMapTileLayer mapLayer;
@@ -66,13 +65,13 @@ namespace Escape_The_Tower
 
         protected override void Update(GameTime gameTime)
         {
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-            _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
-            _perso.Update(deltaSeconds); // time écoulé
+
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -126,6 +125,7 @@ namespace Escape_The_Tower
 
                 ushort txDroite = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
                 ushort tyDroite = (ushort)((_positionPerso.Y + 10) / _tiledMap.TileHeight - 1);
+
                 if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
                     _sensPersoY = -1;
             }
@@ -147,6 +147,15 @@ namespace Escape_The_Tower
             _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
             _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
+            if (_sensPersoX == 0 && _sensPersoY == 0) _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
+
+            // si on bouge alors on play anim
+            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso.Play("walkSouth");
+            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso.Play("walkNorth");
+            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso.Play("walkWest");
+            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso.Play("walkEast");
+
+            _perso.Update(deltaTime); // time écoulé
             base.Update(gameTime);
         }
 

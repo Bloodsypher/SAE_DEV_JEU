@@ -18,11 +18,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin azer.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:azer.tmx
-
 #begin labtilesetfinishedtransparent.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -35,22 +30,10 @@
 /processorParam:TextureFormat=Color
 /build:labtilesetfinishedtransparent.png
 
-#begin mapGenerale.tmx
+#begin maptuto1.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:mapGenerale.tmx
-
-#begin mapGeneraleTuiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mapGeneraleTuiles.png
+/build:maptuto1.tmx
 
 #begin perso.png
 /importer:TextureImporter
@@ -75,4 +58,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Personnage1.png
+
+#begin tuilesmap.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tuilesmap.png
 

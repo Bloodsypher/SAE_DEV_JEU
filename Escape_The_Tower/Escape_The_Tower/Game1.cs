@@ -22,7 +22,10 @@ namespace Escape_The_Tower
         private int _vitessePerso;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 900;
-        private TiledMapTileLayer mapLayer;
+        private TiledMapTileLayer mapLayerCollision;
+        private TiledMapTileLayer mapLayerEscalier;
+        private TiledMapTileLayer mapLayerButton;
+        private TiledMapTileLayer mapLayerPlaques;
         private int _sensPersoX;
         private int _sensPersoY;
 
@@ -55,10 +58,15 @@ namespace Escape_The_Tower
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _tiledMap = Content.Load<TiledMap>("azer");
+            _tiledMap = Content.Load<TiledMap>("maptuto1");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
-            mapLayer = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            //Définition des layers
+
+            mapLayerCollision = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            mapLayerEscalier = _tiledMap.GetLayer<TiledMapTileLayer>("escalier");
+            mapLayerButton = _tiledMap.GetLayer<TiledMapTileLayer>("button");
+            mapLayerPlaques = _tiledMap.GetLayer<TiledMapTileLayer>("plaques");
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
           _perso = new AnimatedSprite(spriteSheet);
@@ -86,15 +94,15 @@ namespace Escape_The_Tower
             // si fleche D enfoncé
             if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)))
             {
-                Console.WriteLine("dzd");
-                ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
+                
+                ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
+                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
 
-                ushort txHaut = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
-                ushort tyHaut = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
+                ushort txHaut = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
+                ushort tyHaut = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
 
-                ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 1);
-                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 2);
+                ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
+                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
 
 
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
@@ -103,14 +111,14 @@ namespace Escape_The_Tower
             // si fleche Q enfoncé
             if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)))
             {
-                ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
+                ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth -0.4);
+                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight -0.4);
 
-                ushort txHaut = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
-                ushort tyHaut = (ushort)(_positionPerso.Y / _tiledMap.TileHeight - 1);
+                ushort txHaut = (ushort)(_positionPerso.X / _tiledMap.TileWidth -0.4);
+                ushort tyHaut = (ushort)(_positionPerso.Y / _tiledMap.TileHeight -0.4);
 
-                ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 1);
-                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight + 2);
+                ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth -0.4);
+                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight -0.4);
 
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = -1;
@@ -120,12 +128,12 @@ namespace Escape_The_Tower
             if (_keyboardState.IsKeyDown(Keys.Z) && !(_keyboardState.IsKeyDown(Keys.S)))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
-                ushort tyGauche = (ushort)((_positionPerso.Y + 10) / _tiledMap.TileHeight - 1);
+                ushort tyGauche = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight - 0.5);
 
 
 
-                ushort txDroite = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
-                ushort tyDroite = (ushort)((_positionPerso.Y + 10) / _tiledMap.TileHeight - 1);
+                ushort txDroite = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
+                ushort tyDroite = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight - 0.5);
 
                 if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
                     _sensPersoY = -1;
@@ -134,11 +142,11 @@ namespace Escape_The_Tower
             // si fleche S enfoncé
             if (_keyboardState.IsKeyDown(Keys.S) && !(_keyboardState.IsKeyDown(Keys.Z)))
             {
-                ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
-                ushort tyGauche = (ushort)((_positionPerso.Y + 2) / _tiledMap.TileHeight + 2);
+                ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.8);
+                ushort tyGauche = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight + 0.8);
 
-                ushort txDroite = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
-                ushort tyDroite = (ushort)((_positionPerso.Y + 2) / _tiledMap.TileHeight + 2);
+                ushort txDroite = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.8);
+                ushort tyDroite = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight + 0.8);
 
                 if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
                     _sensPersoY = 1;
@@ -175,9 +183,14 @@ namespace Escape_The_Tower
 
         private bool IsCollision(ushort x, ushort y)
         {
+            Console.WriteLine(mapLayerCollision.GetTile(x, y).GlobalIdentifier);
+            Console.WriteLine(mapLayerEscalier.GetTile(x, y).GlobalIdentifier);
+            Console.WriteLine(mapLayerButton.GetTile(x, y).GlobalIdentifier);
+            Console.WriteLine(mapLayerPlaques.GetTile(x, y).GlobalIdentifier);
+
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (mapLayer.TryGetTile(x, y, out tile) == false)
+            if (mapLayerCollision.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;

@@ -32,6 +32,10 @@ namespace Escape_The_Tower
         private int sprite_width;
         private int sprite_height;
         private Vector2 _rotation;
+        private Texture2D _textutePorte;
+        private Vector2 _positionPorte;
+        private Texture2D _texturePlaque;
+        private Vector2 _positionPlaque;
         public Game1()
         {
           
@@ -54,7 +58,7 @@ namespace Escape_The_Tower
 
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
-            _graphics.IsFullScreen = true;
+            //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             _vitessePerso = 100;
@@ -67,8 +71,11 @@ namespace Escape_The_Tower
             _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN/2);
             _rotation = new Vector2(0, 0);
 
-            
-            
+            //posiiton obj
+            _positionPorte = new Vector2(LONGUEUR_ECRAN/2 + 80, LARGEUR_ECRAN/2 + 40);
+            _positionPlaque = new Vector2(525, LARGEUR_ECRAN / 2 + 100);
+
+
             base.Initialize();
         }
 
@@ -92,6 +99,10 @@ namespace Escape_The_Tower
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+
+            //Initialise sprite obj
+            _textutePorte = Content.Load<Texture2D>("porte1");
+            _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
         }
 
         protected override void Update(GameTime gameTime)
@@ -106,32 +117,33 @@ namespace Escape_The_Tower
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            
+            Rectangle rectPlaque1 = new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
             //DEPLACEMENT PERSO1
            
+            Rectangle rectPerso1 = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, sprite_width,sprite_height);
             _keyboardState = Keyboard.GetState();
             _sensPersoX = 0;
             _sensPersoY = 0;
 
             // si fleche D enfoncé
-            if (_keyboardState.IsKeyDown(Keys.D) && !(_keyboardState.IsKeyDown(Keys.Q)))
+            if (_keyboardState.IsKeyDown(Keys.D))
             {
                 
                 ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
+                ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +1.5);
 
                 ushort txHaut = (ushort)(_positionPerso.X + sprite_width/2 / _tiledMap.TileWidth +0.5);
-                ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height/2/ _tiledMap.TileHeight +0.5);
+                ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height/2/ _tiledMap.TileHeight +1.5);
 
                 ushort txBas = (ushort)(_positionPerso.X / _tiledMap.TileWidth +0.5);
-                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +0.5);
+                ushort tyBas = (ushort)(_positionPerso.Y / _tiledMap.TileHeight +1.5);
 
 
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = 1;
             }
             // si fleche Q enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Q) && !(_keyboardState.IsKeyDown(Keys.D)))
+            if (_keyboardState.IsKeyDown(Keys.Q))
             {
                 ushort txMillieu = (ushort)(_positionPerso.X / _tiledMap.TileWidth -0.4);
                 ushort tyMillieu = (ushort)(_positionPerso.Y / _tiledMap.TileHeight -0.4);
@@ -147,7 +159,7 @@ namespace Escape_The_Tower
             }
 
             // si fleche Z enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Z) && !(_keyboardState.IsKeyDown(Keys.S)))
+            if (_keyboardState.IsKeyDown(Keys.Z))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
                 ushort tyGauche = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight - 0.5);
@@ -162,7 +174,7 @@ namespace Escape_The_Tower
             }
 
             // si fleche S enfoncé
-            if (_keyboardState.IsKeyDown(Keys.S) && !(_keyboardState.IsKeyDown(Keys.Z)))
+            if (_keyboardState.IsKeyDown(Keys.S))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.8);
                 ushort tyGauche = (ushort)((_positionPerso.Y ) / _tiledMap.TileHeight + 0.8);
@@ -172,6 +184,7 @@ namespace Escape_The_Tower
 
                 if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
                     _sensPersoY = 1;
+
             }
 
             // deplace le personnage
@@ -188,6 +201,16 @@ namespace Escape_The_Tower
 
             _perso.Update(deltaTime); // time écoulé
             base.Update(gameTime);
+
+            if (Collision(rectPlaque1,rectPerso1))
+            {
+                _textutePorte = Content.Load<Texture2D>("porte2");
+                _textutePorte = Content.Load<Texture2D>("porte3");
+                _textutePorte = Content.Load<Texture2D>("porte4");
+
+            }
+            
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -198,17 +221,22 @@ namespace Escape_The_Tower
 
             _tiledMapRenderer.Draw();
             _spriteBatch.Begin();
+            _spriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
+            _spriteBatch.Draw(_texturePlaque,_positionPlaque, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso/*, null, Color.White, 0, _origin, _rotation ,SpriteEffects.None, 0*/);
             _spriteBatch.End();
+            
             base.Draw(gameTime);
         }
 
         private bool IsCollision(ushort x, ushort y)
         {
-            Console.WriteLine(mapLayerCollision.GetTile(x, y).GlobalIdentifier);
-            Console.WriteLine(mapLayerEscalier.GetTile(x, y).GlobalIdentifier);
-            Console.WriteLine(mapLayerButton.GetTile(x, y).GlobalIdentifier);
-            Console.WriteLine(mapLayerPlaques.GetTile(x, y).GlobalIdentifier);
+
+            
+            //Console.WriteLine(mapLayerCollision.GetTile(x, y).GlobalIdentifier);
+            //Console.WriteLine(mapLayerEscalier.GetTile(x, y).GlobalIdentifier);
+            //Console.WriteLine(mapLayerButton.GetTile(x, y).GlobalIdentifier);
+            //Console.WriteLine(mapLayerPlaques.GetTile(x, y).GlobalIdentifier);
 
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
@@ -217,6 +245,11 @@ namespace Escape_The_Tower
             if (!tile.Value.IsBlank)
                 return true;
             return false;
+        }
+
+        public bool Collision(Rectangle rectPlaque1, Rectangle rrectPerso1)
+        {
+            return rrectPerso1.Intersects(rectPlaque1);
         }
     }
 

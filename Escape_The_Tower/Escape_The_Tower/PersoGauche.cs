@@ -26,13 +26,12 @@ namespace Escape_The_Tower
         public static int _vitessePerso;
         public static int _sensPersoX;
         public static int _sensPersoY;
-        public const int LONGUEUR_ECRAN = 1440;
-        public const int LARGEUR_ECRAN = 900;
+        
         public static int sprite_width;
         public static int sprite_height;
         public static TiledMap _tiledMap;
         public static SpriteBatch _spriteBatch;
-        public static object gameTime;
+        
 
         public static void Initialize()
         {
@@ -40,7 +39,7 @@ namespace Escape_The_Tower
             //Initialise perso
             //---------------------------
 
-            _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
+            _positionPerso = new Vector2(Game1.LONGUEUR_ECRAN / 2 - 50, Game1.LARGEUR_ECRAN / 2);
 
             _vitessePerso = 100;
 
@@ -58,8 +57,8 @@ namespace Escape_The_Tower
         }
         public static void Update(GameTime gametime)
         {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
+            _perso.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -139,10 +138,10 @@ namespace Escape_The_Tower
             else if (_sensPersoX == 1 && _sensPersoY == 0) _perso.Play("walkEast");
 
             _perso.Update(deltaTime); // time écoulé
-            Update(gameTime);
+            
 
         }
-        private bool IsCollision(ushort x, ushort y)
+        private static bool IsCollision(ushort x, ushort y)
         {
 
 
@@ -153,7 +152,7 @@ namespace Escape_The_Tower
 
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (mapLayerCollision.TryGetTile(x, y, out tile) == false)
+            if (MapTuto.mapLayerCollision.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;
@@ -164,7 +163,8 @@ namespace Escape_The_Tower
             _spriteBatch.Begin();
             _spriteBatch.Draw(_perso, _positionPerso/*, null, Color.White, 0, _origin, _rotation ,SpriteEffects.None, 0*/);
             _spriteBatch.End();
-            Draw(gameTime);
+            
         }
+
     }
 }

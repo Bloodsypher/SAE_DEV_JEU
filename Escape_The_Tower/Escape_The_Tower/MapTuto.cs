@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -8,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Content;
+using MonoGame.Extended.Screens;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
@@ -16,9 +18,9 @@ using MonoGame.Extended.Timers;
 
 namespace Escape_The_Tower
 {
-    internal class MapTuto
+    internal class MapTuto : GameScreen
     {
-
+        private Game1 _myGame;
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch;
         public static TiledMap _tiledMap;
@@ -36,27 +38,31 @@ namespace Escape_The_Tower
         public const int LARGEUR_ECRAN = 900;
         public static Rectangle rectPlaque1;
         public static Rectangle rectPerso1;
-        public static Vector2 _positionPerso;
         public static int sprite_width;
         public static int sprite_height;
 
+        public MapTuto(Game1 myGame) : base(myGame)
+        {
+            this._myGame = myGame;
+        }
+
         public static void Initialize()
         {
-            _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
+            PersoGauche._positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
             //posiiton obj
             _positionPorte = new Vector2(LONGUEUR_ECRAN / 2 + 80, LARGEUR_ECRAN / 2 + 40);
-            _positionPlaque = new Vector2(512, LARGEUR_ECRAN / 2 + 94);
-            rectPerso1 = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, sprite_width, sprite_height);
+            _positionPlaque = new Vector2(0,0/*512, LARGEUR_ECRAN / 2 + 94*/);
+            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
 
         }
-        public static void LoadContent(Game game)
+        public override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _tiledMap = game.Content.Load<TiledMap>("maptuto1");
-            _tiledMapRenderer = new TiledMapRenderer(game.GraphicsDevice, _tiledMap);
+            _tiledMap = Content.Load<TiledMap>("maptuto1");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
             //Définition des layers
 
@@ -65,12 +71,13 @@ namespace Escape_The_Tower
             mapLayerButton = _tiledMap.GetLayer<TiledMapTileLayer>("button");
             mapLayerPlaques = _tiledMap.GetLayer<TiledMapTileLayer>("plaques");
             //Initialise sprite obj
-            _textutePorte = game.Content.Load<Texture2D>("porte1");
-            _texturePlaque = game.Content.Load<Texture2D>("plaque_de_pression");
-            _textutePorteOuverte = game.Content.Load<Texture2D>("porte4");
+            _textutePorte = Content.Load<Texture2D>("porte1");
+            _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
+            _textutePorteOuverte = Content.Load<Texture2D>("porte4");
+            base.LoadContent();
 
         }
-        public static void Update(GameTime gametime)
+        public override void Update(GameTime gametime)
         {
             
 
@@ -81,15 +88,16 @@ namespace Escape_The_Tower
             }
          
         }
-        public static void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
          // TODO: Add your drawing code here
 
+            GraphicsDevice.Clear(Color.Orange);
             _tiledMapRenderer.Draw();
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
-            _spriteBatch.Draw(_texturePlaque, _positionPlaque, Color.White);
-            _spriteBatch.End();
+            _myGame.SpriteBatch.Begin();
+            _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
+            _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque, Color.White);
+            _myGame.SpriteBatch.End();
 
         }
         public  static bool Collision(Rectangle rectPlaque1, Rectangle rrectPerso1)

@@ -28,10 +28,10 @@ namespace Escape_The_Tower
         private TiledMapTileLayer mapLayerPlaques;
         private int _sensPersoX;
         private int _sensPersoY;
-        private Vector2 _origin;
+        //private Vector2 _origin;
         private int sprite_width;
         private int sprite_height;
-        private Vector2 _rotation;
+        //private Vector2 _rotation;
         private Texture2D _textutePorte;
         private Vector2 _positionPorte;
         private Texture2D _texturePlaque;
@@ -67,9 +67,9 @@ namespace Escape_The_Tower
             //Initialise perso
             //---------------------------
 
-            _origin = new Vector2(sprite_width / 2, sprite_height / 2);
+            //_origin = new Vector2(sprite_width / 2, sprite_height / 2);
             _positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN/2);
-            _rotation = new Vector2(0, 0);
+            //_rotation = new Vector2(0, 0);
 
             //posiiton obj
             _positionPorte = new Vector2(LONGUEUR_ECRAN/2 + 80, LARGEUR_ECRAN/2 + 40);

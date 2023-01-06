@@ -58,7 +58,7 @@ namespace Escape_The_Tower
 
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
-            //_graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             _vitessePerso = 100;
@@ -75,6 +75,7 @@ namespace Escape_The_Tower
             _positionPorte = new Vector2(LONGUEUR_ECRAN/2 + 80, LARGEUR_ECRAN/2 + 40);
             _positionPlaque = new Vector2(512, LARGEUR_ECRAN / 2 + 94);
 
+            Rectangle rectPlaque1 = new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
 
             base.Initialize();
         }
@@ -113,11 +114,11 @@ namespace Escape_The_Tower
 
             // TODO: Add your update logic here
             _tiledMapRenderer.Update(gameTime);
-
+            Rectangle rectPlaque1 = new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Rectangle rectPlaque1 = new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
+            
             //DEPLACEMENT PERSO1
            
             Rectangle rectPerso1 = new Rectangle((int)_positionPerso.X, (int)_positionPerso.Y, sprite_width,sprite_height);

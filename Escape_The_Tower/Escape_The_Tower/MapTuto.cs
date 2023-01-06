@@ -92,7 +92,7 @@ namespace Escape_The_Tower
             _spriteBatch.End();
 
         }
-        public bool Collision(Rectangle rectPlaque1, Rectangle rrectPerso1)
+        public  static bool Collision(Rectangle rectPlaque1, Rectangle rrectPerso1)
         {
             return rrectPerso1.Intersects(rectPlaque1);
         }

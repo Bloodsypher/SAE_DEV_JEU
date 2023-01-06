@@ -73,7 +73,7 @@ namespace Escape_The_Tower
 
             //posiiton obj
             _positionPorte = new Vector2(LONGUEUR_ECRAN/2 + 80, LARGEUR_ECRAN/2 + 40);
-            _positionPlaque = new Vector2(525, LARGEUR_ECRAN / 2 + 100);
+            _positionPlaque = new Vector2(512, LARGEUR_ECRAN / 2 + 94);
 
 
             base.Initialize();

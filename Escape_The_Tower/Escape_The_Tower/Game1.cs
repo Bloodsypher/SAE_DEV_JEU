@@ -15,11 +15,16 @@ namespace Escape_The_Tower
     public class Game1 : Game
     {
         private SpriteBatch _spriteBatch;
-        private readonly ScreenManager screenManager;
+
+        //load des différents screen
+        private readonly ScreenManager _screenManager;
+        private readonly MenuDemarage _fondMenu;
+
+
         private GraphicsDeviceManager _graphics;
-        public const int LONGUEUR_ECRAN = 1440;
-        public const int LARGEUR_ECRAN = 900;
-        public enum Etats { Menu, Controls, Play, Quit };
+        public const int LONGUEUR_ECRAN = 1920;
+        public const int LARGEUR_ECRAN = 1080;
+        public enum Etats { Menu, Jouer, Regle, Quit };
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -28,12 +33,19 @@ namespace Escape_The_Tower
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 800;
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            
+            _screenManager = new ScreenManager();
+
             _ScreenMapTuto = new MapTuto(this);
-            screenManager = new ScreenManager();
-            Components.Add(screenManager);
+            _fondMenu = new MenuDemarage(this);
+
+            Components.Add(_screenManager);
         }
         public SpriteBatch SpriteBatch
         {
@@ -88,7 +100,7 @@ namespace Escape_The_Tower
 
             // TODO: use this.Content to load your game content here
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
+            _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
           
         }
 
@@ -98,6 +110,25 @@ namespace Escape_The_Tower
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // On teste le clic de souris et l'état pour savoir quelle action faire 
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                // Attention, l'état a été mis à jour directement par l'écran en question
+                if (this.Etat == Etats.Quit)
+                    Exit();
+
+                else if (this.Etat == Etats.Jouer)
+                    _screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
+
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            {
+                if (this.Etat == Etats.Menu)
+                    _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
+            }
+                
             base.Update(gameTime);
             // TODO: Add your update logic here
            

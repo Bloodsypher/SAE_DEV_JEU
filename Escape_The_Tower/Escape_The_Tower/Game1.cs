@@ -18,6 +18,7 @@ namespace Escape_The_Tower
 
         //load des différents screen
         private readonly ScreenManager _screenManager;
+        private readonly PersoGauche _screenPerso;
         private readonly MenuDemarage _fondMenu;
 
 
@@ -41,7 +42,7 @@ namespace Escape_The_Tower
 
             
             _screenManager = new ScreenManager();
-
+            _screenPerso = new PersoGauche(this);
             _ScreenMapTuto = new MapTuto(this);
             _fondMenu = new MenuDemarage(this);
 
@@ -89,7 +90,7 @@ namespace Escape_The_Tower
 
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
-            _graphics.IsFullScreen = true;
+            //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -115,6 +116,9 @@ namespace Escape_The_Tower
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
                 // Attention, l'état a été mis à jour directement par l'écran en question
+                if (this.Etat != Etats.Menu)
+                    _screenManager.LoadScreen(_screenPerso, new FadeTransition(GraphicsDevice, Color.Black));
+
                 if (this.Etat == Etats.Quit)
                     Exit();
 

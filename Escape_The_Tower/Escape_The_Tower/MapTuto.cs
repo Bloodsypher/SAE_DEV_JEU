@@ -25,6 +25,7 @@ namespace Escape_The_Tower
         public static SpriteBatch _spriteBatch;
         public static TiledMap _tiledMap;
         public static TiledMapRenderer _tiledMapRenderer;
+
         public static TiledMapTileLayer mapLayerCollision;
         public static TiledMapTileLayer mapLayerEscalier;
         public static TiledMapTileLayer mapLayerButton;
@@ -51,7 +52,7 @@ namespace Escape_The_Tower
             PersoGauche._positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
             //posiiton obj
             _positionPorte = new Vector2(LONGUEUR_ECRAN / 2 + 80, LARGEUR_ECRAN / 2 + 40);
-            _positionPlaque = new Vector2(0,0/*512, LARGEUR_ECRAN / 2 + 94*/);
+            _positionPlaque = new Vector2(LONGUEUR_ECRAN /2 - 512, LARGEUR_ECRAN / 2 + 94);
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
 
@@ -70,6 +71,7 @@ namespace Escape_The_Tower
             mapLayerEscalier = _tiledMap.GetLayer<TiledMapTileLayer>("escalier");
             mapLayerButton = _tiledMap.GetLayer<TiledMapTileLayer>("button");
             mapLayerPlaques = _tiledMap.GetLayer<TiledMapTileLayer>("plaques");
+
             //Initialise sprite obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");

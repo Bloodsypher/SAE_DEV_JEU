@@ -19,9 +19,9 @@ using MonoGame.Extended.Screens;
 
 namespace Escape_The_Tower
 {
-    internal class PersoGauche : GameComponent
+    internal class PersoGauche
     {
-        private Game1 _myGame;
+        
 
         public static Vector2 _positionPerso;
         public static AnimatedSprite _perso;
@@ -35,10 +35,6 @@ namespace Escape_The_Tower
         public static TiledMap _tiledMap;
         public static SpriteBatch _spriteBatch;
 
-        public PersoGauche(Game1 myGame) : base(myGame)
-        {
-            _myGame = myGame;
-        }
 
         public static void Initialize()
         {

@@ -49,10 +49,8 @@ namespace Escape_The_Tower
 
         public static void Initialize()
         {
-            PersoGauche._positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
+            PersoGauche._positionPerso = new Vector2(800, LARGEUR_ECRAN / 2);
             //posiiton obj
-            _positionPorte = new Vector2(LONGUEUR_ECRAN / 2 + 80, LARGEUR_ECRAN / 2 + 40);
-            _positionPlaque = new Vector2(LONGUEUR_ECRAN /2 - 512, LARGEUR_ECRAN / 2 + 94);
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
 
@@ -81,7 +79,7 @@ namespace Escape_The_Tower
         }
         public override void Update(GameTime gametime)
         {
-            _positionPorte = new Vector2(LONGUEUR_ECRAN / 2 + 80, LARGEUR_ECRAN / 2 + 40);
+            _positionPorte = new Vector2(800, 485);
             _positionPlaque = new Vector2(LONGUEUR_ECRAN / 2 - 512, LARGEUR_ECRAN / 2 + 94);
 
             if (Collision(rectPlaque1, rectPerso1))

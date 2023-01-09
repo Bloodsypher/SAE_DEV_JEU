@@ -23,8 +23,8 @@ namespace Escape_The_Tower
 
 
         private GraphicsDeviceManager _graphics;
-        public const int LONGUEUR_ECRAN = 1920;
-        public const int LARGEUR_ECRAN = 1080;
+        public const int LONGUEUR_ECRAN = 1440;
+        public const int LARGEUR_ECRAN = 800;
         public enum Etats { Menu, Jouer, Regle, Quit };
 
         // on définit un champ pour stocker l'état en cours du jeu
@@ -34,8 +34,7 @@ namespace Escape_The_Tower
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            _graphics.PreferredBackBufferWidth = 800;
-            _graphics.PreferredBackBufferHeight = 800;
+            
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -87,10 +86,11 @@ namespace Escape_The_Tower
 
             //int w = graphics.DisplayMode.Width;
             //int h = graphics.DisplayMode.Height;
-
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
-            //_graphics.IsFullScreen = true;
+
+
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -117,7 +117,8 @@ namespace Escape_The_Tower
             {
                 // Attention, l'état a été mis à jour directement par l'écran en question
                 if (this.Etat != Etats.Menu)
-                    _screenManager.LoadScreen(_screenPerso, new FadeTransition(GraphicsDevice, Color.Black));
+
+                    /*_screenManager.LoadScreen(_screenPerso, new FadeTransition(GraphicsDevice, Color.Black))*/;
 
                 if (this.Etat == Etats.Quit)
                     Exit();

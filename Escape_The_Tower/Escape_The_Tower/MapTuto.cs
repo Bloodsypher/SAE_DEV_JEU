@@ -36,7 +36,7 @@ namespace Escape_The_Tower
         public static Texture2D _texturePlaque;
         public static Vector2 _positionPlaque;
         public const int LONGUEUR_ECRAN = 1440;
-        public const int LARGEUR_ECRAN = 900;
+        public const int LARGEUR_ECRAN = 800;
         public static Rectangle rectPlaque1;
         public static Rectangle rectPerso1;
         public static int sprite_width;

@@ -51,7 +51,7 @@ namespace Escape_The_Tower
         {
             PersoGauche._positionPerso = new Vector2(LONGUEUR_ECRAN / 2 - 50, LARGEUR_ECRAN / 2);
             //posiiton obj
-            _positionPorte = new Vector2(LONGUEUR_ECRAN / 2 + 80, LARGEUR_ECRAN / 2 + 40);
+            _positionPorte = new Vector2(LONGUEUR_ECRAN / 2, LARGEUR_ECRAN / 2);
             _positionPlaque = new Vector2(LONGUEUR_ECRAN /2 - 512, LARGEUR_ECRAN / 2 + 94);
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);

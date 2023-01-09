@@ -49,6 +49,7 @@ namespace Escape_The_Tower
 
         public static void Initialize()
         {
+            _persoGauche = new personnage (joueur1,'Z',,  )
             PersoGauche._positionPerso = new Vector2(800, LARGEUR_ECRAN / 2);
             //posiiton obj
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
@@ -79,8 +80,8 @@ namespace Escape_The_Tower
         }
         public override void Update(GameTime gametime)
         {
-            _positionPorte = new Vector2(800, 485);
-            _positionPlaque = new Vector2(LONGUEUR_ECRAN / 2 - 512, LARGEUR_ECRAN / 2 + 94);
+            _positionPorte = new Vector2(800, 487);
+            _positionPlaque = new Vector2(512,544);
 
             if (Collision(rectPlaque1, rectPerso1))
             {
@@ -93,7 +94,7 @@ namespace Escape_The_Tower
         {
          // TODO: Add your drawing code here
 
-            GraphicsDevice.Clear(Color.Orange);
+            GraphicsDevice.Clear(Color.Black);
             _tiledMapRenderer.Draw();
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);

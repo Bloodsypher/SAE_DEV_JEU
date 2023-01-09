@@ -117,7 +117,7 @@ namespace Escape_The_Tower
             {
                 // Attention, l'état a été mis à jour directement par l'écran en question
                 if (this.Etat != Etats.Menu)
-
+                    //PersoGauche player = new PersoGauche(Game);
                     /*_screenManager.LoadScreen(_screenPerso, new FadeTransition(GraphicsDevice, Color.Black))*/;
 
                 if (this.Etat == Etats.Quit)
@@ -142,7 +142,8 @@ namespace Escape_The_Tower
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
 
             // TODO: Add your drawing code here
             

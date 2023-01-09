@@ -15,11 +15,14 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
+using MonoGame.Extended.Screens;
 
 namespace Escape_The_Tower
 {
-    internal class PersoGauche
+    internal class PersoGauche : GameComponent
     {
+        private Game1 _myGame;
+
         public static Vector2 _positionPerso;
         public static AnimatedSprite _perso;
         public static KeyboardState _keyboardState;
@@ -31,7 +34,11 @@ namespace Escape_The_Tower
         public static int sprite_height;
         public static TiledMap _tiledMap;
         public static SpriteBatch _spriteBatch;
-        
+
+        public PersoGauche(Game1 myGame) : base(myGame)
+        {
+            _myGame = myGame;
+        }
 
         public static void Initialize()
         {
@@ -48,7 +55,6 @@ namespace Escape_The_Tower
 
         public static void LoadContent(Game game)
         {
-
             //définition des animation
 
             SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());

@@ -59,9 +59,9 @@ namespace Escape_The_Tower
 
         public override void Initialize()
         {
-            
-
            
+
+
         }
         public override void LoadContent()
         {
@@ -106,6 +106,10 @@ namespace Escape_The_Tower
 
 
 
+            if (Collision(rectPorte, rectPerso2))
+            {
+                PersoDroite._positionPerso.Y = PersoDroite._positionPerso.Y + 5;
+            }
 
             if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque2, rectPerso2))
             {
@@ -116,9 +120,12 @@ namespace Escape_The_Tower
             if (porteouverte == true)
             {
                 _textutePorte = _textutePorteOuverte;
-                rectPorte = new Vector2(0, 0);
-
+                if (Collision(rectPorte, rectPerso2))
+                {
+                    PersoDroite._positionPerso.Y = PersoDroite._positionPerso.Y - 5;
+                }
             }
+
 
             if (Collision(rectfeu, rectPerso1))
             {

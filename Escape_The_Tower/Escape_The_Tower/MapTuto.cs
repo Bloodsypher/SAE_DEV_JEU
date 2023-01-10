@@ -43,6 +43,8 @@ namespace Escape_The_Tower
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
+        public static AnimatedSprite _feu;
+        public static Vector2 _positionfeu;
 
         public MapTuto(Game1 myGame) : base(myGame)
         {
@@ -73,9 +75,12 @@ namespace Escape_The_Tower
             //Initialise sprite obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
-            _textutePorteOuverte = Content.Load<Texture2D>("porte4");
+            _textutePorteOuverte = Content.Load<Texture2D>("porte");
+            SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
-            
+            //feu
+            _feu = new AnimatedSprite(spriteSheetfeu);
+            _positionfeu = new Vector2(Game1.LONGUEUR_ECRAN / 2 - 50, Game1.LARGEUR_ECRAN / 2);
             base.LoadContent();
 
         }
@@ -108,11 +113,12 @@ namespace Escape_The_Tower
             GraphicsDevice.Clear(Color.Black);
             _tiledMapRenderer.Draw();
             _myGame.SpriteBatch.Begin();
+
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
-
+            _spriteBatch.Draw(_feu, _positionfeu);
 
             _myGame.SpriteBatch.End();
 

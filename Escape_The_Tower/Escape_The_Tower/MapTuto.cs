@@ -47,7 +47,7 @@ namespace Escape_The_Tower
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
-        public static Rectangle table;
+        public static Rectangle recttable;
 
 
         public static AnimatedSprite _feu;
@@ -130,15 +130,9 @@ namespace Escape_The_Tower
             _positionfeu7 = new Vector2(685, 250);
 
 
-            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
-            rectfeu2 = new Rectangle((int)_positionfeu2.X, (int)_positionfeu2.Y, 48, 64);
-            rectfeu3 = new Rectangle((int)_positionfeu3.X, (int)_positionfeu3.Y, 48, 64);
-            rectfeu4 = new Rectangle((int)_positionfeu4.X, (int)_positionfeu4.Y, 48, 64);
-            rectfeu5 = new Rectangle((int)_positionfeu5.X, (int)_positionfeu5.Y, 48, 64);
-            rectfeu6 = new Rectangle((int)_positionfeu6.X, (int)_positionfeu6.Y, 48, 64);
-            rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
+           
 
-            rectPorte = new Rectangle(860, 300, 32, 64);
+            recttable = new Rectangle(855, 305, 32, 64);
             base.LoadContent();
 
         }
@@ -147,6 +141,14 @@ namespace Escape_The_Tower
         public override void Update(GameTime gametime)
         {
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
+
+            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
+            rectfeu2 = new Rectangle((int)_positionfeu2.X, (int)_positionfeu2.Y, 48, 64);
+            rectfeu3 = new Rectangle((int)_positionfeu3.X, (int)_positionfeu3.Y, 48, 64);
+            rectfeu4 = new Rectangle((int)_positionfeu4.X, (int)_positionfeu4.Y, 48, 64);
+            rectfeu5 = new Rectangle((int)_positionfeu5.X, (int)_positionfeu5.Y, 48, 64);
+            rectfeu6 = new Rectangle((int)_positionfeu6.X, (int)_positionfeu6.Y, 48, 64);
+            rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
 
             //rectangle perso
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
@@ -184,7 +186,7 @@ namespace Escape_The_Tower
             _feu.Play("fire");
             _feu.Update(deltaTime);
 
-            if (Collision(rectPorte, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
+            if (Collision(recttable, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
             {
                 _positionfeu = new Vector2(1000,1000);
                 _positionfeu2 = new Vector2(1000, 1000);

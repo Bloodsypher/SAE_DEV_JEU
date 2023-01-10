@@ -47,8 +47,31 @@ namespace Escape_The_Tower
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
+        public static Rectangle table;
+
+
         public static AnimatedSprite _feu;
         public static Vector2 _positionfeu;
+        public static Vector2 _positionfeu2;
+        public static Vector2 _positionfeu3;
+        public static Vector2 _positionfeu4;
+        public static Vector2 _positionfeu5;
+        public static Vector2 _positionfeu6;
+        public static Vector2 _positionfeu7;
+
+
+        public static Rectangle rectfeu2;
+        public static Rectangle rectfeu3;
+        public static Rectangle rectfeu4;
+        public static Rectangle rectfeu5;
+        public static Rectangle rectfeu6;
+        public static Rectangle rectfeu7;
+        
+
+
+
+
+
         public static bool porteouverte = false;
         
 
@@ -84,25 +107,51 @@ namespace Escape_The_Tower
             _textutePorteOuverte = Content.Load<Texture2D>("porte4");
             SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
+
+            //obj
+            _positionPorte = new Vector2(800, 487);
+            rectPorte = new Rectangle((int)_positionPorte.X, (int)_positionPorte.Y, 100, 32);
+
+            _positionPlaque1 = new Vector2(512, 544);
+            _positionPlaque2 = new Vector2(895, 544);
+
+            rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
+            rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
+
             //feu
             _feu = new AnimatedSprite(spriteSheetfeu);
+           
             _positionfeu = new Vector2(595, 193);
+            _positionfeu2 = new Vector2(595, 205);
+            _positionfeu3 = new Vector2(595, 230);
+            _positionfeu4 = new Vector2(600, 250);
+            _positionfeu5 = new Vector2(625, 250);
+            _positionfeu6 = new Vector2(655, 250);
+            _positionfeu7 = new Vector2(685, 250);
+
+
+            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
+            rectfeu2 = new Rectangle((int)_positionfeu2.X, (int)_positionfeu2.Y, 48, 64);
+            rectfeu3 = new Rectangle((int)_positionfeu3.X, (int)_positionfeu3.Y, 48, 64);
+            rectfeu4 = new Rectangle((int)_positionfeu4.X, (int)_positionfeu4.Y, 48, 64);
+            rectfeu5 = new Rectangle((int)_positionfeu5.X, (int)_positionfeu5.Y, 48, 64);
+            rectfeu6 = new Rectangle((int)_positionfeu6.X, (int)_positionfeu6.Y, 48, 64);
+            rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
+
+            rectPorte = new Rectangle(850, 300, 32, 64);
             base.LoadContent();
 
         }
+
+
         public override void Update(GameTime gametime)
         {
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
-            //posiiton obj
-            _positionPorte = new Vector2(800, 487);
-            _positionPlaque1 = new Vector2(512, 544);
-            _positionPlaque2 = new Vector2(895, 544);
+
+            //rectangle perso
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
-            rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
-            rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
-            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
-            rectPorte = new Rectangle((int)_positionPorte.X, (int)_positionPorte.Y, 64, 32);
+
 
 
 
@@ -127,13 +176,18 @@ namespace Escape_The_Tower
             }
 
 
-            if (Collision(rectfeu, rectPerso1))
+            if (Collision(rectfeu, rectPerso1) || Collision(rectfeu2, rectPerso1) || Collision(rectfeu3, rectPerso1) || Collision(rectfeu4, rectPerso1) || Collision(rectfeu5, rectPerso1) || Collision(rectfeu6, rectPerso1) || Collision(rectfeu7, rectPerso1))
             {
                 PersoGauche._positionPerso = new Vector2(600, 600);
             }
 
             _feu.Play("fire");
             _feu.Update(deltaTime);
+
+            if (Collision(rectPorte, rectPerso2))
+            {
+                Console.WriteLine("test");
+            }
 
         }
         public override void Draw(GameTime gameTime)
@@ -147,7 +201,16 @@ namespace Escape_The_Tower
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque2, Color.White);
+
             _myGame.SpriteBatch.Draw(_feu, _positionfeu);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu2);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu3);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu4);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu5);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu6);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu7);
+
+
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
             

@@ -39,6 +39,7 @@ namespace Escape_The_Tower
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
         public static Rectangle rectPlaque1;
+        public static Rectangle rectPorte;
         public static Rectangle rectPlaque2;
         public static Rectangle rectPerso1;
         public static Rectangle rectPerso2;
@@ -48,6 +49,7 @@ namespace Escape_The_Tower
         private GameTime gameTime;
         public static AnimatedSprite _feu;
         public static Vector2 _positionfeu;
+        public static bool porteouverte = false;
         
 
         public MapTuto(Game1 myGame) : base(myGame)
@@ -100,14 +102,22 @@ namespace Escape_The_Tower
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
             rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
+            rectPorte = new Rectangle((int)_positionPorte.X, (int)_positionPorte.Y, 64, 32);
 
 
 
 
             if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque2, rectPerso2))
             {
-                _textutePorte = _textutePorteOuverte;
+                porteouverte = true;
+
                 
+            }
+            if (porteouverte == true)
+            {
+                _textutePorte = _textutePorteOuverte;
+                rectPorte = new Vector2(0, 0);
+
             }
 
             if (Collision(rectfeu, rectPerso1))

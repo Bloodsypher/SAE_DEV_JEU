@@ -34,7 +34,7 @@ namespace Escape_The_Tower
         public static Texture2D _textutePorteOuverte;
         public static Vector2 _positionPorte;
         public static Texture2D _texturePlaque;
-        public static Vector2 _positionPlaque;
+        public static Vector2 _positionPlaque1;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
         public static Rectangle rectPlaque1;
@@ -48,16 +48,12 @@ namespace Escape_The_Tower
             this._myGame = myGame;
         }
 
-        public static void Initialize()
+        public override void Initialize()
         {
             //_persoGauche = new personnage (joueur1,'Z',,  )
-            PersoGauche._positionPerso = new Vector2(800, LARGEUR_ECRAN / 2);
-            //posiiton obj
-            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
-            rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
+            PersoGauche._positionPerso = new Vector2(550, LARGEUR_ECRAN / 2);
 
            
-
         }
         public override void LoadContent()
         {
@@ -85,10 +81,14 @@ namespace Escape_The_Tower
         }
         public override void Update(GameTime gametime)
         {
-            
 
+            //posiiton obj
             _positionPorte = new Vector2(800, 487);
-            _positionPlaque = new Vector2(512,544);
+            _positionPlaque1 = new Vector2(512, 544);
+            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
+            rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
+
+
 
             if (Collision(rectPlaque1, rectPerso1))
             {
@@ -105,10 +105,10 @@ namespace Escape_The_Tower
             _tiledMapRenderer.Draw();
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
-            _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque, Color.White);
-            
-            
-            
+            _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
+            PersoGauche.Draw(_myGame.SpriteBatch);
+
+
             _myGame.SpriteBatch.End();
 
         }

@@ -18,7 +18,6 @@ namespace Escape_The_Tower
 
         //load des différents screen
         private readonly ScreenManager _screenManager;
-        private readonly PersoGauche _screenPerso;
         private readonly MenuDemarage _fondMenu;
 
 
@@ -119,10 +118,8 @@ namespace Escape_The_Tower
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
                 // Attention, l'état a été mis à jour directement par l'écran en question
-                if (this.Etat != Etats.Menu)
-                    //PersoGauche player = new PersoGauche(Game);
-                    /*_screenManager.LoadScreen(_screenPerso, new FadeTransition(GraphicsDevice, Color.Black))*/;
-
+               
+                 
                 if (this.Etat == Etats.Quit)
                     Exit();
 
@@ -147,7 +144,7 @@ namespace Escape_The_Tower
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            PersoGauche.Draw(_spriteBatch);
+           
             _spriteBatch.End();
             // TODO: Add your drawing code here
             

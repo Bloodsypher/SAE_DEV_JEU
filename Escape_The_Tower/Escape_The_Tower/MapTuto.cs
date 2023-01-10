@@ -35,9 +35,11 @@ namespace Escape_The_Tower
         public static Vector2 _positionPorte;
         public static Texture2D _texturePlaque;
         public static Vector2 _positionPlaque1;
+        public static Vector2 _positionPlaque2;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
         public static Rectangle rectPlaque1;
+        public static Rectangle rectPlaque2;
         public static Rectangle rectPerso1;
         public static Rectangle rectPerso2;
         public static int sprite_width;
@@ -85,14 +87,16 @@ namespace Escape_The_Tower
             //posiiton obj
             _positionPorte = new Vector2(800, 487);
             _positionPlaque1 = new Vector2(512, 544);
+            _positionPlaque2 = new Vector2(895, 544);
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
+            rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
 
 
 
 
-            if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque1, rectPerso2))
+            if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque2, rectPerso2))
             {
                 _textutePorte = _textutePorteOuverte;
 
@@ -108,8 +112,11 @@ namespace Escape_The_Tower
             GraphicsDevice.Clear(Color.Black);
             _tiledMapRenderer.Draw();
             _myGame.SpriteBatch.Begin();
+
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
+            _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque2, Color.White);
+
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
 

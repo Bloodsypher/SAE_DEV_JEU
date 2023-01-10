@@ -41,7 +41,7 @@ namespace Escape_The_Tower
             //Initialise perso
             //---------------------------
 
-            _positionPerso = new Vector2(Game1.LONGUEUR_ECRAN / 2 - 50, Game1.LARGEUR_ECRAN / 2);
+            _positionPerso = new Vector2(600, 600);
 
             _vitessePerso = 100;
 

@@ -19,12 +19,13 @@ namespace Escape_The_Tower
         //load des différents screen
         private readonly ScreenManager _screenManager;
         private readonly MenuDemarage _fondMenu;
+        private  Map1 _ScreenMap1;
 
 
         private GraphicsDeviceManager _graphics;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
-        public enum Etats { Menu, Jouer, Regle, Quit };
+        public enum Etats { Menu, Jouer, Regle, Quit, Map1 };
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -42,6 +43,7 @@ namespace Escape_The_Tower
             _screenManager = new ScreenManager();
             _ScreenMapTuto = new MapTuto(this);
             _fondMenu = new MenuDemarage(this);
+            _ScreenMap1 = new Map1(this);
 
             Components.Add(_screenManager);
         }
@@ -136,7 +138,12 @@ namespace Escape_The_Tower
                 if (this.Etat == Etats.Menu)
                     _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
             }
-                
+            
+            if (this.Etat == Etats.Map1)
+            {
+                _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
+            }
+
             base.Update(gameTime);
             // TODO: Add your update logic here
            

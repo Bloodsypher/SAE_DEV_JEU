@@ -48,6 +48,8 @@ namespace Escape_The_Tower
         public static int sprite_height;
         private GameTime gameTime;
         public static Rectangle recttable;
+        public static Rectangle recescalier1;
+        public static Rectangle recescalier2;
 
 
         public static AnimatedSprite _feu;
@@ -130,7 +132,8 @@ namespace Escape_The_Tower
             _positionfeu7 = new Vector2(685, 250);
 
 
-           
+            recescalier1 = new Rectangle(610, 193, 96, 64);
+            recescalier2 = new Rectangle(730,193,96,64);
 
             recttable = new Rectangle(855, 305, 32, 64);
             base.LoadContent();
@@ -196,6 +199,12 @@ namespace Escape_The_Tower
                 _positionfeu6 = new Vector2(1000, 1000);
                 _positionfeu7 = new Vector2(1000, 1000);
                
+            }
+
+            if (Collision(recescalier1, rectPerso1) && Collision(recescalier2, rectPerso2))
+            {
+                Console.WriteLine("test");
+                _myGame.Etat = Game1.Etats.Map1;
             }
 
         }

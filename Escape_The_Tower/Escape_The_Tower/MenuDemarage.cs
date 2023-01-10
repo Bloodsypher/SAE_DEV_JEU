@@ -29,7 +29,7 @@ namespace Escape_The_Tower
 
         public override void LoadContent()
         {
-            _fondMenu = Content.Load<Texture2D>("menu");
+            _fondMenu = Content.Load<Texture2D>("Menu");
             base.LoadContent();
         }
 

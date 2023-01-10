@@ -30,12 +30,6 @@
 /processorParam:TextureFormat=Color
 /build:burning_loop_1.png
 
-#begin fire.sf
-/importer:SpriteFactoryContentImporter
-/processor:SpriteFactoryContentProcessor
-/processorParam:ContentType=MonoGame.Extended MonoGame.Extended.Animations.SpriteFactory.SpriteFactoryFileReader, MonoGame.Extended.Animations
-/build:fire.sf
-
 #begin labtilesetfinishedtransparent.png
 /importer:TextureImporter
 /processor:TextureProcessor

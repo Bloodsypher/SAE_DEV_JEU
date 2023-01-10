@@ -138,7 +138,7 @@ namespace Escape_The_Tower
             rectfeu6 = new Rectangle((int)_positionfeu6.X, (int)_positionfeu6.Y, 48, 64);
             rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
 
-            rectPorte = new Rectangle(850, 300, 32, 64);
+            rectPorte = new Rectangle(860, 300, 32, 64);
             base.LoadContent();
 
         }
@@ -184,8 +184,15 @@ namespace Escape_The_Tower
             _feu.Play("fire");
             _feu.Update(deltaTime);
 
-            if (Collision(rectPorte, rectPerso2))
+            if (Collision(rectPorte, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
             {
+                _positionfeu = new Vector2(1000,1000);
+                _positionfeu2 = new Vector2(1000, 1000);
+                _positionfeu3 = new Vector2(1000, 1000);
+                _positionfeu4 = new Vector2(1000, 1000);
+                _positionfeu5 = new Vector2(1000, 1000);
+                _positionfeu6 = new Vector2(1000, 1000);
+                _positionfeu7 = new Vector2(1000, 1000);
                 Console.WriteLine("test");
             }
 

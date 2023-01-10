@@ -102,8 +102,8 @@ namespace Escape_The_Tower
 
             // TODO: use this.Content to load your game content here
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
             PersoGauche.LoadContent(this);
+            _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
           
         }
 

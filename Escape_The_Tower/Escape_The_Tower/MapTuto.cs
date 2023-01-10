@@ -77,7 +77,7 @@ namespace Escape_The_Tower
             //Initialise sprite obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
-            _textutePorteOuverte = Content.Load<Texture2D>("porte");
+            _textutePorteOuverte = Content.Load<Texture2D>("porte1");
             SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
             //feu

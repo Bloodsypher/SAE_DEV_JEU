@@ -52,7 +52,7 @@ namespace Escape_The_Tower
         {
             //définition des animation
 
-            SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("perso2.sf", new JsonContentLoader());
             _perso2 = new AnimatedSprite(spriteSheet);
 
         }
@@ -130,13 +130,13 @@ namespace Escape_The_Tower
             _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
             _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
-            if (_sensPersoX == 0 && _sensPersoY == 0) _perso2.Play("idle"); // une des animations définies dans « persoAnimation.sf »
+            if (_sensPersoX == 0 && _sensPersoY == 0) _perso2.Play("pause"); // une des animations définies dans « persoAnimation.sf »
 
             // si on bouge alors on play anim
-            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso2.Play("walkSouth");
-            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso2.Play("walkNorth");
-            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso2.Play("walkWest");
-            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso2.Play("walkEast");
+            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso2.Play("marcheB");
+            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso2.Play("marcheH");
+            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso2.Play("marcheG");
+            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso2.Play("marcheD");
 
             _perso2.Update(deltaTime); // time écoulé
 

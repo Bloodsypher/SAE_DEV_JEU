@@ -41,6 +41,7 @@ namespace Escape_The_Tower
         public static Rectangle rectPerso1;
         public static int sprite_width;
         public static int sprite_height;
+        private GameTime gameTime;
 
         public MapTuto(Game1 myGame) : base(myGame)
         {
@@ -54,6 +55,8 @@ namespace Escape_The_Tower
             //posiiton obj
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1= new Rectangle((int)_positionPlaque.X, (int)_positionPlaque.Y, 32, 32);
+
+           
 
         }
         public override void LoadContent()
@@ -75,11 +78,15 @@ namespace Escape_The_Tower
             _textutePorte = Content.Load<Texture2D>("porte1");
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
             _textutePorteOuverte = Content.Load<Texture2D>("porte4");
+
+            
             base.LoadContent();
 
         }
         public override void Update(GameTime gametime)
         {
+            
+
             _positionPorte = new Vector2(800, 487);
             _positionPlaque = new Vector2(512,544);
 
@@ -99,6 +106,9 @@ namespace Escape_The_Tower
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque, Color.White);
+            
+            
+            
             _myGame.SpriteBatch.End();
 
         }

@@ -89,7 +89,7 @@ namespace Escape_The_Tower
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
 
 
-            _graphics.IsFullScreen = true;
+            //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             PersoGauche.Initialize();

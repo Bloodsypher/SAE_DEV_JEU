@@ -30,6 +30,11 @@
 /processorParam:TextureFormat=Color
 /build:labtilesetfinishedtransparent.png
 
+#begin map1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:map1.tmx
+
 #begin maptuto1.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor

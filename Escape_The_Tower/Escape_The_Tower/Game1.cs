@@ -92,6 +92,7 @@ namespace Escape_The_Tower
             _graphics.ApplyChanges();
 
             PersoGauche.Initialize();
+            PersoDroite.Initialize();
 
             base.Initialize();
         }
@@ -102,6 +103,7 @@ namespace Escape_The_Tower
             // TODO: use this.Content to load your game content here
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             PersoGauche.LoadContent(this);
+            PersoDroite.LoadContent(this);
             _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
           
         }
@@ -109,6 +111,7 @@ namespace Escape_The_Tower
         protected override void Update(GameTime gameTime)
         {
             PersoGauche.Update(gameTime);
+            PersoDroite.Update(gameTime);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();

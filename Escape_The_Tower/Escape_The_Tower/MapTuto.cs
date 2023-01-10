@@ -39,6 +39,7 @@ namespace Escape_The_Tower
         public const int LARGEUR_ECRAN = 800;
         public static Rectangle rectPlaque1;
         public static Rectangle rectPerso1;
+        public static Rectangle rectPerso2;
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
@@ -50,8 +51,7 @@ namespace Escape_The_Tower
 
         public override void Initialize()
         {
-            //_persoGauche = new personnage (joueur1,'Z',,  )
-            PersoGauche._positionPerso = new Vector2(550, LARGEUR_ECRAN / 2);
+            
 
            
         }
@@ -87,15 +87,19 @@ namespace Escape_The_Tower
             _positionPlaque1 = new Vector2(512, 544);
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
+            rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
 
 
 
-            if (Collision(rectPlaque1, rectPerso1))
+
+            if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque1, rectPerso2))
             {
                 _textutePorte = _textutePorteOuverte;
 
             }
-         
+
+            
+
         }
         public override void Draw(GameTime gameTime)
         {
@@ -107,14 +111,16 @@ namespace Escape_The_Tower
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             PersoGauche.Draw(_myGame.SpriteBatch);
+            PersoDroite.Draw(_myGame.SpriteBatch);
 
 
             _myGame.SpriteBatch.End();
 
         }
-        public static bool Collision(Rectangle rectPlaque1, Rectangle rrectPerso1)
+        public static bool Collision(Rectangle rectPlaque1, Rectangle rectPerso1)
         {
-            return rrectPerso1.Intersects(rectPlaque1);
+            return rectPerso1.Intersects(rectPlaque1);
+            
         }
     }
 }

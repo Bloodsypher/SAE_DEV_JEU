@@ -193,7 +193,7 @@ namespace Escape_The_Tower
                 _positionfeu5 = new Vector2(1000, 1000);
                 _positionfeu6 = new Vector2(1000, 1000);
                 _positionfeu7 = new Vector2(1000, 1000);
-                Console.WriteLine("test");
+               
             }
 
         }

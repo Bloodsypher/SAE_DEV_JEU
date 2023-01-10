@@ -124,7 +124,8 @@ namespace Escape_The_Tower
 
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
-            _spriteBatch.Draw(_feu, _positionfeu);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu);
+            
 
             _myGame.SpriteBatch.End();
 

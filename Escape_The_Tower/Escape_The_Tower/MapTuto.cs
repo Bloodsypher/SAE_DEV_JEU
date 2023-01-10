@@ -42,11 +42,13 @@ namespace Escape_The_Tower
         public static Rectangle rectPlaque2;
         public static Rectangle rectPerso1;
         public static Rectangle rectPerso2;
+        public static Rectangle rectfeu;
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
         public static AnimatedSprite _feu;
         public static Vector2 _positionfeu;
+        
 
         public MapTuto(Game1 myGame) : base(myGame)
         {
@@ -77,18 +79,18 @@ namespace Escape_The_Tower
             //Initialise sprite obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
-            _textutePorteOuverte = Content.Load<Texture2D>("porte1");
+            _textutePorteOuverte = Content.Load<Texture2D>("porte4");
             SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
             //feu
             _feu = new AnimatedSprite(spriteSheetfeu);
-            _positionfeu = new Vector2(Game1.LONGUEUR_ECRAN / 2 - 50, Game1.LARGEUR_ECRAN / 2);
+            _positionfeu = new Vector2(595, 193);
             base.LoadContent();
 
         }
         public override void Update(GameTime gametime)
         {
-
+            float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
             //posiiton obj
             _positionPorte = new Vector2(800, 487);
             _positionPlaque1 = new Vector2(512, 544);
@@ -97,6 +99,7 @@ namespace Escape_The_Tower
             rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
             rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
+            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
 
 
 
@@ -104,10 +107,16 @@ namespace Escape_The_Tower
             if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque2, rectPerso2))
             {
                 _textutePorte = _textutePorteOuverte;
-
+                
             }
 
-            
+            if (Collision(rectfeu, rectPerso1))
+            {
+                PersoGauche._positionPerso = new Vector2(600, 600);
+            }
+
+            _feu.Play("fire");
+            _feu.Update(deltaTime);
 
         }
         public override void Draw(GameTime gameTime)
@@ -121,10 +130,11 @@ namespace Escape_The_Tower
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque2, Color.White);
-
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu);
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
-            _spriteBatch.Draw(_feu, _positionfeu);
+            
+            
 
             _myGame.SpriteBatch.End();
 

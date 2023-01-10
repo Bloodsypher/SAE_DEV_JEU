@@ -35,6 +35,7 @@ namespace Escape_The_Tower
 
         public override void Update(GameTime gameTime)
         {
+            
 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)

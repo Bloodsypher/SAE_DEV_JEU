@@ -160,11 +160,11 @@ namespace Escape_The_Tower
                 return true;
             return false;
         }
-        public static void Draw(GameTime gameTime)
+        public static void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_perso, _positionPerso/*, null, Color.White, 0, _origin, _rotation ,SpriteEffects.None, 0*/);
-            _spriteBatch.End();
+            
+            _spriteBatch.Draw(_perso, _positionPerso);
+            
             
         }
 

@@ -49,7 +49,7 @@ namespace Escape_The_Tower
 
         public static void Initialize()
         {
-            _persoGauche = new personnage (joueur1,'Z',,  )
+            //_persoGauche = new personnage (joueur1,'Z',,  )
             PersoGauche._positionPerso = new Vector2(800, LARGEUR_ECRAN / 2);
             //posiiton obj
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);

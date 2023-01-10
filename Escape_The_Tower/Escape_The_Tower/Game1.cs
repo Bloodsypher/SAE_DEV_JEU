@@ -41,7 +41,6 @@ namespace Escape_The_Tower
 
             
             _screenManager = new ScreenManager();
-            _screenPerso = new PersoGauche(this);
             _ScreenMapTuto = new MapTuto(this);
             _fondMenu = new MenuDemarage(this);
 
@@ -93,6 +92,8 @@ namespace Escape_The_Tower
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
+            PersoGauche.Initialize();
+
             base.Initialize();
         }
 
@@ -102,11 +103,13 @@ namespace Escape_The_Tower
             // TODO: use this.Content to load your game content here
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
+            PersoGauche.LoadContent(this);
           
         }
 
         protected override void Update(GameTime gameTime)
         {
+            PersoGauche.Update(gameTime);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -143,8 +146,9 @@ namespace Escape_The_Tower
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-
+            _spriteBatch.Begin();
+            PersoGauche.Draw(_spriteBatch);
+            _spriteBatch.End();
             // TODO: Add your drawing code here
             
             base.Draw(gameTime);

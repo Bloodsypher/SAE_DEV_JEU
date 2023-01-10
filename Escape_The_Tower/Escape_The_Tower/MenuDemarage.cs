@@ -22,9 +22,9 @@ namespace Escape_The_Tower
         {
             _myGame = game;
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(75, 110, 640, 160);
-            lesBoutons[1] = new Rectangle(75, 320, 640, 160);
-            lesBoutons[2] = new Rectangle(75, 528, 640, 160);
+            lesBoutons[0] = new Rectangle(424, 141, 600, 100);
+            lesBoutons[1] = new Rectangle(343, 320, 766, 100);
+            lesBoutons[2] = new Rectangle(364, 499, 719, 100);
         }
 
         public override void LoadContent()

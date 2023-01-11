@@ -20,12 +20,12 @@ namespace Escape_The_Tower
         private readonly ScreenManager _screenManager;
         private readonly MenuDemarage _fondMenu;
         private  Map1 _ScreenMap1;
-
+        private MenuControle _ScreenControle;
 
         private GraphicsDeviceManager _graphics;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
-        public enum Etats { Menu, Jouer, Regle, Quit, Map1, Map11 };
+        public enum Etats { Menu, Jouer, Controle, Quit, Map1, Map11 };
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -44,6 +44,7 @@ namespace Escape_The_Tower
             _ScreenMapTuto = new MapTuto(this);
             _fondMenu = new MenuDemarage(this);
             _ScreenMap1 = new Map1(this);
+            _ScreenControle = new MenuControle(this);
 
             Components.Add(_screenManager);
         }
@@ -123,17 +124,23 @@ namespace Escape_The_Tower
             if (_mouseState.LeftButton == ButtonState.Pressed)
             {
                 // Attention, l'état a été mis à jour directement par l'écran en question
-               
-                 
+
+
                 if (this.Etat == Etats.Quit)
                     Exit();
 
                 else if (this.Etat == Etats.Jouer)
                     _screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
 
+                else if (this.Etat == Etats.Controle)
+                    _screenManager.LoadScreen(_ScreenControle, new FadeTransition(GraphicsDevice, Color.Black));
+
+                else if (this.Etat == Etats.Menu)
+                    _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
+
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            if (Keyboard.GetState().IsKeyDown(Keys.Delete))
             {
                 if (this.Etat == Etats.Menu)
                     _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));

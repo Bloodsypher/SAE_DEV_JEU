@@ -47,7 +47,7 @@ namespace Escape_The_Tower
                         if (i == 0)
                             _myGame.Etat = Game1.Etats.Jouer;
                         else if (i == 1)
-                            _myGame.Etat = Game1.Etats.Regle    ;
+                            _myGame.Etat = Game1.Etats.Controle;
                         else
                             _myGame.Etat = Game1.Etats.Quit;
                         break;

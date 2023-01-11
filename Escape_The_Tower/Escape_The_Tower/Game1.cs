@@ -25,7 +25,7 @@ namespace Escape_The_Tower
         private GraphicsDeviceManager _graphics;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
-        public enum Etats { Menu, Jouer, Regle, Quit, Map1 };
+        public enum Etats { Menu, Jouer, Regle, Quit, Map1, Map11 };
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -139,9 +139,10 @@ namespace Escape_The_Tower
                     _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
             }
             
-            if (this.Etat == Etats.Map1)
+            if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
+                this.Etat = Etats.Map11;
             }
 
             base.Update(gameTime);

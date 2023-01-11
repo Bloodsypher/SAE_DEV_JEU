@@ -38,15 +38,17 @@ namespace Escape_The_Tower
         public static Vector2 _positionPlaque2;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
+
         public static Rectangle rectPlaque1;
         public static Rectangle rectPorte;
         public static Rectangle rectPlaque2;
         public static Rectangle rectPerso1;
         public static Rectangle rectPerso2;
-        public static Rectangle rectfeu;
+
         public static int sprite_width;
         public static int sprite_height;
         private GameTime gameTime;
+
         public static Rectangle recttable;
         public static Rectangle recescalier1;
         public static Rectangle recescalier2;
@@ -62,6 +64,7 @@ namespace Escape_The_Tower
         public static Vector2 _positionfeu7;
 
 
+        public static Rectangle rectfeu;
         public static Rectangle rectfeu2;
         public static Rectangle rectfeu3;
         public static Rectangle rectfeu4;
@@ -186,8 +189,6 @@ namespace Escape_The_Tower
                 PersoGauche._positionPerso = new Vector2(600, 600);
             }
 
-            _feu.Play("fire");
-            _feu.Update(deltaTime);
 
             if (Collision(recttable, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
             {
@@ -207,6 +208,8 @@ namespace Escape_The_Tower
                 _myGame.Etat = Game1.Etats.Map1;
             }
 
+            _feu.Play("fire");
+            _feu.Update(deltaTime);
         }
         public override void Draw(GameTime gameTime)
         {

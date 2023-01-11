@@ -59,10 +59,10 @@
 /processor:TiledMapProcessor
 /build:map1.tmx
 
-#begin MapEtage2.tmx
+#begin Map2LF.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:MapEtage2.tmx
+/build:Map2LF.tmx
 
 #begin maptuto1.tmx
 /importer:TiledMapImporter

@@ -64,64 +64,60 @@ namespace Escape_The_Tower
             _sensPersoX = 0;
             _sensPersoY = 0;
 
+            //-------Deplacement--------
+
             // si fleche D enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Right))
-            {
+            if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
+            { 
+                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 1);
+                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight );
 
-                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.5);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight + 1.5);
+                //ushort txHaut = (ushort)(_positionPerso.X + sprite_width / 2 / MapTuto._tiledMap.TileWidth + 0.5);
+                //ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height / 2 / MapTuto._tiledMap.TileHeight + 1.5);
 
-                ushort txHaut = (ushort)(_positionPerso.X + sprite_width / 2 / MapTuto._tiledMap.TileWidth + 0.5);
-                ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height / 2 / MapTuto._tiledMap.TileHeight + 1.5);
-
-                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.5);
-                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight + 1.5);
+                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 1);
+                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight + 2);
 
 
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = 1;
             }
             // si fleche Q enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Left))
+            if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
             {
-                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.4);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight - 0.4);
+                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 1);
+                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight +0.3);
 
-                ushort txHaut = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.4);
-                ushort tyHaut = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight - 0.4);
 
-                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.4);
-                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight - 0.4);
+                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 1);
+                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight -0.3);
 
                 if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = -1;
             }
 
             // si fleche Z enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Up))
+            if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
             {
                 ushort txGauche = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.5);
-                ushort tyGauche = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight - 0.5);
+                ushort tyGauche = (ushort)((_positionPerso.Y + 10) / MapTuto._tiledMap.TileHeight - 1);
 
 
 
-                ushort txDroite = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.5);
-                ushort tyDroite = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight - 0.5);
+                ushort txDroite = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.5);
+                ushort tyDroite = (ushort)((_positionPerso.Y + 10) / MapTuto._tiledMap.TileHeight - 1);
 
                 if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
                     _sensPersoY = -1;
             }
 
             // si fleche S enfoncé
-            if (_keyboardState.IsKeyDown(Keys.Down))
+            if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
-                ushort txGauche = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.8);
-                ushort tyGauche = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight + 0.8);
+                ushort txGauche = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth);
+                ushort tyGauche = (ushort)((_positionPerso.Y + 0.5) / MapTuto._tiledMap.TileHeight + 0.5);
 
-                ushort txDroite = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.8);
-                ushort tyDroite = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight + 0.8);
-
-                if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
+                if (!IsCollision(txGauche, tyGauche))
                     _sensPersoY = 1;
 
             }

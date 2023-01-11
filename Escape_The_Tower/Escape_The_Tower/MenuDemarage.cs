@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Media;
 
 namespace Escape_The_Tower
 {
@@ -16,6 +17,7 @@ namespace Escape_The_Tower
         private Game1 _myGame;
         private Texture2D _fondMenu;
         private Rectangle[] lesBoutons;
+        public Song _bcgMusic;
 
 
         public MenuDemarage(Game1 game) : base(game)
@@ -26,10 +28,15 @@ namespace Escape_The_Tower
             lesBoutons[1] = new Rectangle(343, 320, 766, 100);
             lesBoutons[2] = new Rectangle(364, 499, 719, 100);
         }
-
+        public override void Initialize()
+        {
+            MediaPlayer.IsRepeating = true;
+        }
         public override void LoadContent()
         {
             _fondMenu = Content.Load<Texture2D>("Menu");
+            _bcgMusic = Content.Load<Song>("ThemeMenu");
+            MediaPlayer.Play(_bcgMusic);
             base.LoadContent();
         }
 
@@ -47,7 +54,7 @@ namespace Escape_The_Tower
                         if (i == 0)
                             _myGame.Etat = Game1.Etats.Jouer;
                         else if (i == 1)
-                            _myGame.Etat = Game1.Etats.Regle    ;
+                            _myGame.Etat = Game1.Etats.Controle;
                         else
                             _myGame.Etat = Game1.Etats.Quit;
                         break;

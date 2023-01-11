@@ -184,6 +184,12 @@
 /processorParam:TextureFormat=Color
 /build:porte4.png
 
+#begin ThemeMenu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:ThemeMenu.mp3
+
 #begin tuilesmap.png
 /importer:TextureImporter
 /processor:TextureProcessor

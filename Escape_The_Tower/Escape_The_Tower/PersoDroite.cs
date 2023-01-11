@@ -27,8 +27,8 @@ namespace Escape_The_Tower
         public static AnimatedSprite _perso2;
         public static KeyboardState _keyboardState;
         public static int _vitessePerso;
-        public static int _sensPersoX;
-        public static int _sensPersoY;
+        public static double _sensPersoX;
+        public static double _sensPersoY;
 
         public static int sprite_width;
         public static int sprite_height;
@@ -66,65 +66,63 @@ namespace Escape_The_Tower
 
             //-------Deplacement--------
 
-            // si fleche D enfoncé
+            // si fleche fleche droite enfoncé
             if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
-            { 
-                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 1);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight );
+            {
+                ushort tx = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth +0.7 );
+                ushort ty = (ushort)(_positionPerso.Y  / MapTuto._tiledMap.TileHeight );
 
-                //ushort txHaut = (ushort)(_positionPerso.X + sprite_width / 2 / MapTuto._tiledMap.TileWidth + 0.5);
-                //ushort tyHaut = (ushort)(_positionPerso.Y + sprite_height / 2 / MapTuto._tiledMap.TileHeight + 1.5);
-
-                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 1);
-                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight + 2);
-
-
-                if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
+               
+                if (!IsCollision(tx, ty) && !IsCollision(tx, ty))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = 1;
+                
             }
-            // si fleche Q enfoncé
+            // si fleche fleche gauche enfoncé
             if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
             {
-                ushort txMillieu = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 1);
-                ushort tyMillieu = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight +0.3);
+                ushort tx = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.6);
+                ushort ty = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight );
 
+                
 
-                ushort txBas = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 1);
-                ushort tyBas = (ushort)(_positionPerso.Y / MapTuto._tiledMap.TileHeight -0.3);
-
-                if (!IsCollision(txMillieu, tyMillieu) && !IsCollision(txBas, tyBas))// && !IsCollision(txHaut, tyHaut)
+                if (!IsCollision(tx, ty) && !IsCollision(tx, ty))// && !IsCollision(txHaut, tyHaut)
                     _sensPersoX = -1;
+                
+                
             }
 
-            // si fleche Z enfoncé
+            // si fleche fleche haut enfoncé
             if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
             {
-                ushort txGauche = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth - 0.5);
-                ushort tyGauche = (ushort)((_positionPerso.Y + 10) / MapTuto._tiledMap.TileHeight - 1);
+                ushort tx = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth );
+                ushort ty = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight - 0.7);
 
 
 
-                ushort txDroite = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth + 0.5);
-                ushort tyDroite = (ushort)((_positionPerso.Y + 10) / MapTuto._tiledMap.TileHeight - 1);
-
-                if (!IsCollision(txGauche, tyGauche) && !IsCollision(txDroite, tyDroite))
+                if (!IsCollision(tx, ty) && !IsCollision(tx, ty))
                     _sensPersoY = -1;
+                
             }
 
-            // si fleche S enfoncé
+            // si fleche bas enfoncé
             if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
-                ushort txGauche = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth);
-                ushort tyGauche = (ushort)((_positionPerso.Y + 0.5) / MapTuto._tiledMap.TileHeight + 0.5);
+                ushort tx = (ushort)(_positionPerso.X / MapTuto._tiledMap.TileWidth );
+                ushort ty = (ushort)((_positionPerso.Y) / MapTuto._tiledMap.TileHeight + 0.5);
 
-                if (!IsCollision(txGauche, tyGauche))
+                
+
+                if (!IsCollision(tx, ty))
                     _sensPersoY = 1;
+                
 
             }
 
+
+
             // deplace le personnage
-            _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
-            _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
+            _positionPerso.X += (float)_sensPersoX * _vitessePerso * deltaTime;
+            _positionPerso.Y += (float)_sensPersoY * _vitessePerso * deltaTime;
 
             if (_sensPersoX == 0 && _sensPersoY == 0) _perso2.Play("pause"); // une des animations définies dans « persoAnimation.sf »
 

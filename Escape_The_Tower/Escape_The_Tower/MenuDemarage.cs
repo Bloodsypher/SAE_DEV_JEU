@@ -42,7 +42,7 @@ namespace Escape_The_Tower
 
         public override void Update(GameTime gameTime)
         {
-            
+
 
             MouseState _mouseState = Mouse.GetState();
             if (_mouseState.LeftButton == ButtonState.Pressed)
@@ -67,7 +67,7 @@ namespace Escape_The_Tower
         {
             GraphicsDevice.Clear(Color.Black);
             _myGame.SpriteBatch.Begin();
-            _myGame.SpriteBatch.Draw(_fondMenu, new Vector2(0,0), Color.White);
+            _myGame.SpriteBatch.Draw(_fondMenu, new Vector2(0, 0), Color.White);
             _myGame.SpriteBatch.End();
         }
     }

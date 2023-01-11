@@ -71,8 +71,8 @@ namespace Escape_The_Tower
             PersoDroite._positionPerso = new Vector2(942, 705);
             PersoGauche._positionPerso = new Vector2(428, 700);
 
-            PersoDroite.mapJoueur2 = _tiledMap1;
-            PersoDroite.mapPlayer2 = mapLayerCollision1;
+            PersoDroite.mapJoueur = _tiledMap1;
+            PersoDroite.mapPlayer = mapLayerCollision1;
             PersoGauche.mapJoueur1 = _tiledMap1;
             PersoGauche.mapPlayer1 = mapLayerCollision1;
 

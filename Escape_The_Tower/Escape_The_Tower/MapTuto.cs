@@ -143,8 +143,8 @@ namespace Escape_The_Tower
 
             recttable = new Rectangle(855, 305, 32, 64);
 
-            PersoDroite.mapJoueur = _tiledMap;
-            PersoDroite.mapPlayer = mapLayerCollision;
+            PersoDroite.mapJoueur2 = _tiledMap;
+            PersoDroite.mapPlayer2 = mapLayerCollision;
             PersoGauche.mapJoueur1 = _tiledMap;
             PersoGauche.mapPlayer1 = mapLayerCollision;
 

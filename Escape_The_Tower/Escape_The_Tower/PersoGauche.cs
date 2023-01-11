@@ -24,7 +24,7 @@ namespace Escape_The_Tower
 
 
         public static Vector2 _positionPerso;
-        public static AnimatedSprite _perso;
+        public static AnimatedSprite _perso1;
         public static KeyboardState _keyboardState;
         public static int _vitessePerso;
         public static int _sensPersoX;
@@ -55,13 +55,13 @@ namespace Escape_The_Tower
             //définition des animation
 
             SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
+            _perso1 = new AnimatedSprite(spriteSheet);
 
         }
         public static void Update(GameTime gametime)
         {
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
-            _perso.Update(deltaTime);
+            _perso1.Update(deltaTime);
             _keyboardState = Keyboard.GetState();
             _sensPersoX = 0;
             _sensPersoY = 0;
@@ -113,15 +113,15 @@ namespace Escape_The_Tower
             _positionPerso.X += _sensPersoX * _vitessePerso * deltaTime;
             _positionPerso.Y += _sensPersoY * _vitessePerso * deltaTime;
 
-            if (_sensPersoX == 0 && _sensPersoY == 0) _perso.Play("idle"); // une des animations définies dans « persoAnimation.sf »
+            if (_sensPersoX == 0 && _sensPersoY == 0) _perso1.Play("idle"); // une des animations définies dans « persoAnimation.sf »
 
             // si on bouge alors on play anim
-            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso.Play("walkSouth");
-            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso.Play("walkNorth");
-            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso.Play("walkWest");
-            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso.Play("walkEast");
+            else if (_sensPersoX == 1 && _sensPersoY == 1 || _sensPersoX == -1 && _sensPersoY == 1 || _sensPersoX == 0 && _sensPersoY == 1) _perso1.Play("walkSouth");
+            else if (_sensPersoX == 1 && _sensPersoY == -1 || _sensPersoX == -1 && _sensPersoY == -1 || _sensPersoX == 0 && _sensPersoY == -1) _perso1.Play("walkNorth");
+            else if (_sensPersoX == -1 && _sensPersoY == 0) _perso1.Play("walkWest");
+            else if (_sensPersoX == 1 && _sensPersoY == 0) _perso1.Play("walkEast");
 
-            _perso.Update(deltaTime); // time écoulé
+            _perso1.Update(deltaTime); // time écoulé
 
 
         }
@@ -145,7 +145,7 @@ namespace Escape_The_Tower
         public static void Draw(SpriteBatch _spriteBatch)
         {
 
-            _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_perso1, _positionPerso);
 
 
         }

@@ -43,7 +43,7 @@ namespace Escape_The_Tower
             _screenManager = new ScreenManager();
             _ScreenMapTuto = new MapTuto(this);
             _fondMenu = new MenuDemarage(this);
-            _ScreenMap1 = new Map1(this);
+            //_ScreenMap1 = new Map1(this);
 
             Components.Add(_screenManager);
         }
@@ -141,7 +141,7 @@ namespace Escape_The_Tower
             
             if (this.Etat == Etats.Map1)
             {
-                _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
+              //  _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
             }
 
             base.Update(gameTime);

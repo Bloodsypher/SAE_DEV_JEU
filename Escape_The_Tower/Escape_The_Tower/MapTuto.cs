@@ -87,8 +87,8 @@ namespace Escape_The_Tower
 
         public override void Initialize()
         {
-           
 
+            
 
         }
         public override void LoadContent()
@@ -139,6 +139,14 @@ namespace Escape_The_Tower
             recescalier2 = new Rectangle(730,193,96,64);
 
             recttable = new Rectangle(855, 305, 32, 64);
+            
+            PersoGauche.mapJoueur = mapLayerCollision;
+            PersoDroite.mapJoueur = mapLayerCollision;
+
+            PersoGauche.mapPlayer = _tiledMap;
+            PersoDroite.mapPlayer = _tiledMap;
+
+
             base.LoadContent();
 
         }
@@ -146,6 +154,7 @@ namespace Escape_The_Tower
 
         public override void Update(GameTime gametime)
         {
+
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
 
             rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
@@ -157,15 +166,15 @@ namespace Escape_The_Tower
             rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
 
             //rectangle perso
-            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
-            rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
+            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso1.X, (int)PersoGauche._positionPerso1.Y, sprite_width, sprite_height);
+            rectPerso2 = new Rectangle((int)PersoDroite._positionPerso2.X, (int)PersoDroite._positionPerso2.Y, sprite_width, sprite_height);
 
 
 
 
             if (Collision(rectPorte, rectPerso2))
             {
-                PersoDroite._positionPerso.Y = PersoDroite._positionPerso.Y + 5;
+                PersoDroite._positionPerso2.Y = PersoDroite._positionPerso2.Y + 5;
             }
 
             if (Collision(rectPlaque1, rectPerso1) && Collision(rectPlaque2, rectPerso2))
@@ -179,14 +188,14 @@ namespace Escape_The_Tower
                 _textutePorte = _textutePorteOuverte;
                 if (Collision(rectPorte, rectPerso2))
                 {
-                    PersoDroite._positionPerso.Y = PersoDroite._positionPerso.Y - 5;
+                    PersoDroite._positionPerso2.Y = PersoDroite._positionPerso2.Y - 5;
                 }
             }
 
 
             if (Collision(rectfeu, rectPerso1) || Collision(rectfeu2, rectPerso1) || Collision(rectfeu3, rectPerso1) || Collision(rectfeu4, rectPerso1) || Collision(rectfeu5, rectPerso1) || Collision(rectfeu6, rectPerso1) || Collision(rectfeu7, rectPerso1))
             {
-                PersoGauche._positionPerso = new Vector2(600, 600);
+                PersoGauche._positionPerso1 = new Vector2(600, 600);
             }
 
 
@@ -210,6 +219,13 @@ namespace Escape_The_Tower
 
             _feu.Play("fire");
             _feu.Update(deltaTime);
+
+
+            //if (_myGame.Etat == Game1.Etats.Map1)
+            //{
+            //    _tiledMap = Content.Load<TiledMap>("map1");
+
+            //}
         }
         public override void Draw(GameTime gameTime)
         {

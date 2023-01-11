@@ -146,11 +146,14 @@ namespace Escape_The_Tower
                     _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
             }
             
-            if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D1))
+            if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
                 this.Etat = Etats.Map11;
             }
+
+            if ( Keyboard.GetState().IsKeyDown(Keys.D1))
+                _screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
 
             base.Update(gameTime);
             // TODO: Add your update logic here

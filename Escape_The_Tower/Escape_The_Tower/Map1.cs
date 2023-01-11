@@ -26,9 +26,9 @@ namespace Escape_The_Tower
 
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch;
-        public static TiledMap _tiledMap;
+        public static TiledMap _tiledMap2;
         public static TiledMapRenderer _tiledMapRenderer;
-        public static TiledMapTileLayer mapLayerCollision;
+        public static TiledMapTileLayer mapLayerCollision2;
 
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
@@ -41,6 +41,8 @@ namespace Escape_The_Tower
         public static int sprite_width;
         public static int sprite_height;
 
+
+
         public Map1(Game1 myGame) : base(myGame)
         {
             this._myGame = myGame;
@@ -48,7 +50,7 @@ namespace Escape_The_Tower
 
         public override void Initialize()
         {
-
+            
 
 
         }
@@ -56,15 +58,22 @@ namespace Escape_The_Tower
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _tiledMap = Content.Load<TiledMap>("map1");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            _tiledMap2 = Content.Load<TiledMap>("map1");
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap2);
 
             //définition des layers 
-            mapLayerCollision = _tiledMap.GetLayer<TiledMapTileLayer>("collision");
+            mapLayerCollision2 = _tiledMap2.GetLayer<TiledMapTileLayer>("collision1");
 
             //définition des textures obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _textutePorteOuverte = Content.Load<Texture2D>("porte4");
+
+            
+
+            PersoGauche.mapJoueur = mapLayerCollision2;
+            PersoDroite.mapJoueur = mapLayerCollision2;
+            PersoDroite.mapPlayer = _tiledMap2;
+            PersoGauche.mapPlayer = _tiledMap2;
 
             base.LoadContent();
 
@@ -72,14 +81,16 @@ namespace Escape_The_Tower
 
         public override void Update(GameTime gametime)
         {
+
+
+
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
 
-            rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
-            rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
+            //rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
+            //rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
 
-            PersoGauche._positionPerso = new Vector2(428, 700);
-            PersoDroite._positionPerso = new Vector2(942, 705);
-
+            PersoGauche._positionPerso1 = new Vector2(428, 700);
+            PersoDroite._positionPerso2 = new Vector2(50,50);
 
 
         }
@@ -87,6 +98,7 @@ namespace Escape_The_Tower
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
             _tiledMapRenderer.Draw();
 
             _myGame.SpriteBatch.Begin();

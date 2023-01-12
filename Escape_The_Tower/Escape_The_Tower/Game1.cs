@@ -149,7 +149,6 @@ namespace Escape_The_Tower
             if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
-                this.Etat = Etats.Map11;
             }
 
             base.Update(gameTime);

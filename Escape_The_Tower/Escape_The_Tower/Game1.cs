@@ -25,7 +25,7 @@ namespace Escape_The_Tower
         private GraphicsDeviceManager _graphics;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
-        public enum Etats { Menu, Jouer, Controle, Quit, Map1, Map11 };
+        public enum Etats { Menu, Jouer, Controle, Quit, Map1, Map11, Map2};
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;

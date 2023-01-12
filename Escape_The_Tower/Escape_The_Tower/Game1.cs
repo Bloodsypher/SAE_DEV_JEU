@@ -21,6 +21,7 @@ namespace Escape_The_Tower
         private readonly MenuDemarage _fondMenu;
         private Map1 _ScreenMap1;
         private Map2 _ScreenMap2;
+        private Map3 _ScreenMap3;
         private MenuControle _ScreenControle;
         private readonly ecranFin _fondFin;
 
@@ -48,6 +49,7 @@ namespace Escape_The_Tower
             _ScreenMap1 = new Map1(this);
             _ScreenControle = new MenuControle(this);
             _ScreenMap2 = new Map2(this);
+            _ScreenMap3 = new Map3(this);
             _fondFin = new ecranFin(this);
 
             Components.Add(_screenManager);
@@ -166,7 +168,13 @@ namespace Escape_The_Tower
                 this.Etat = Etats.Map22;
             }
 
-            if (this.Etat == Etats.Fin || Keyboard.GetState().IsKeyDown(Keys.D4))
+            if (this.Etat == Etats.Map3 || Keyboard.GetState().IsKeyDown(Keys.D4))
+            {
+                _screenManager.LoadScreen(_ScreenMap3, new FadeTransition(GraphicsDevice, Color.Black));
+                this.Etat = Etats.Map33;
+            }
+
+            if (this.Etat == Etats.Fin || Keyboard.GetState().IsKeyDown(Keys.D5))
             {
                 _screenManager.LoadScreen(_fondFin, new FadeTransition(GraphicsDevice, Color.Black));
                 this.Etat = Etats.Fin2;

@@ -75,8 +75,6 @@ namespace Escape_The_Tower
 
 
 
-
-
         public static bool porteouverte = false;
 
 
@@ -115,7 +113,7 @@ namespace Escape_The_Tower
             _textutePorteOuverte = Content.Load<Texture2D>("porte4");
             SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
-
+           
             //obj
             _positionPorte = new Vector2(800, 487);
             rectPorte = new Rectangle((int)_positionPorte.X, (int)_positionPorte.Y, 100, 32);

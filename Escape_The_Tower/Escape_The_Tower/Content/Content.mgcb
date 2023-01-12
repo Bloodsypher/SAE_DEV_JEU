@@ -59,11 +59,6 @@
 /processor:TiledMapProcessor
 /build:map1.tmx
 
-#begin Map2LF.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Map2LF.tmx
-
 #begin maptuto1.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor

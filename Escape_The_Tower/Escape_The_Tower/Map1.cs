@@ -17,6 +17,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Timers;
+using System.Security;
 
 namespace Escape_The_Tower
 {
@@ -49,6 +50,12 @@ namespace Escape_The_Tower
 
         public static bool porteouverte = false;
 
+        public static Texture2D _texturePlaque;
+        public static Vector2 _positionPlaque1;
+
+        public static Rectangle mort1;
+
+
 
         public Map1(Game1 myGame) : base(myGame)
         {
@@ -64,7 +71,8 @@ namespace Escape_The_Tower
 
         public override void LoadContent()
         {
-
+            _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
+            _positionPlaque1 = new Vector2(863, 704);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap1 = Content.Load<TiledMap>("map1");
@@ -89,6 +97,8 @@ namespace Escape_The_Tower
             PersoDroite.mapPlayer2 = mapLayerCollision1;
             PersoGauche.mapJoueur1 = _tiledMap1;
             PersoGauche.mapPlayer1 = mapLayerCollision1;
+
+            mort1 = new Rectangle(863, 704, 32, 32);
 
             base.LoadContent();
 
@@ -124,7 +134,9 @@ namespace Escape_The_Tower
                 }
             }
 
-            Console.WriteLine(PersoDroite._positionPerso.X + " " + PersoDroite._positionPerso.Y);
+
+            //if (Collision)
+            //Console.WriteLine(PersoDroite._positionPerso.X + " " + PersoDroite._positionPerso.Y);
             //PersoDroite._perso2.Update(deltaTime);
 
 
@@ -138,6 +150,7 @@ namespace Escape_The_Tower
 
             _myGame.SpriteBatch.Begin();
 
+            _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
 
 

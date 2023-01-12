@@ -33,8 +33,8 @@ namespace Escape_The_Tower
         public static int sprite_width;
         public static int sprite_height;
 
-        public static TiledMapTileLayer mapPlayer;
-        public static TiledMap mapJoueur;
+        public static TiledMapTileLayer mapPlayer2;
+        public static TiledMap mapJoueur2;
 
 
 
@@ -72,8 +72,8 @@ namespace Escape_The_Tower
             // si fleche fleche droite enfoncé
             if (_keyboardState.IsKeyDown(Keys.Right) && !(_keyboardState.IsKeyDown(Keys.Left)))
             {
-                ushort tx = (ushort)(_positionPerso.X / mapJoueur.TileWidth + 0.7);
-                ushort ty = (ushort)(_positionPerso.Y / mapJoueur.TileHeight);
+                ushort tx = (ushort)(_positionPerso.X / mapJoueur2.TileWidth + 0.7);
+                ushort ty = (ushort)(_positionPerso.Y / mapJoueur2.TileHeight);
 
 
                 if (!IsCollision(tx, ty) && !IsCollision(tx, ty))// && !IsCollision(txHaut, tyHaut)
@@ -83,8 +83,8 @@ namespace Escape_The_Tower
             // si fleche fleche gauche enfoncé
             if (_keyboardState.IsKeyDown(Keys.Left) && !(_keyboardState.IsKeyDown(Keys.Right)))
             {
-                ushort tx = (ushort)(_positionPerso.X / mapJoueur.TileWidth - 0.6);
-                ushort ty = (ushort)(_positionPerso.Y / mapJoueur.TileHeight);
+                ushort tx = (ushort)(_positionPerso.X / mapJoueur2.TileWidth - 0.6);
+                ushort ty = (ushort)(_positionPerso.Y / mapJoueur2.TileHeight);
 
 
 
@@ -97,8 +97,8 @@ namespace Escape_The_Tower
             // si fleche fleche haut enfoncé
             if (_keyboardState.IsKeyDown(Keys.Up) && !(_keyboardState.IsKeyDown(Keys.Down)))
             {
-                ushort tx = (ushort)(_positionPerso.X / mapJoueur.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y) / mapJoueur.TileHeight - 0.7);
+                ushort tx = (ushort)(_positionPerso.X / mapJoueur2.TileWidth);
+                ushort ty = (ushort)((_positionPerso.Y) / mapJoueur2.TileHeight - 0.7);
 
 
 
@@ -110,8 +110,8 @@ namespace Escape_The_Tower
             // si fleche bas enfoncé
             if (_keyboardState.IsKeyDown(Keys.Down) && !(_keyboardState.IsKeyDown(Keys.Up)))
             {
-                ushort tx = (ushort)(_positionPerso.X / mapJoueur.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y) / mapJoueur.TileHeight + 0.5);
+                ushort tx = (ushort)(_positionPerso.X / mapJoueur2.TileWidth);
+                ushort ty = (ushort)((_positionPerso.Y) / mapJoueur2.TileHeight + 0.5);
 
 
 
@@ -150,7 +150,7 @@ namespace Escape_The_Tower
 
             // définition de tile qui peut être null (?)
             TiledMapTile? tile;
-            if (mapPlayer.TryGetTile(x, y, out tile) == false)
+            if (mapPlayer2.TryGetTile(x, y, out tile) == false)
                 return false;
             if (!tile.Value.IsBlank)
                 return true;

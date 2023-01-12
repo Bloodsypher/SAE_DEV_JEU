@@ -59,6 +59,11 @@
 /processor:TiledMapProcessor
 /build:map1.tmx
 
+#begin Map2LF.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map2LF.tmx
+
 #begin maptuto1.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -148,6 +153,18 @@
 /processorParam:TextureFormat=Color
 /build:porte1.png
 
+#begin porte1Vertical.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:porte1Vertical.png
+
 #begin porte2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -183,6 +200,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:porte4.png
+
+#begin porte4Vertical.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:porte4Vertical.png
 
 #begin ThemeMenu.mp3
 /importer:Mp3Importer

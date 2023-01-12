@@ -81,9 +81,6 @@ namespace Escape_The_Tower
 
         public override void LoadContent()
         {
-            _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
-            _positionPlaque1 = new Vector2(1120, 290);
-            _positionPlaque2 = new Vector2(1055, 545);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap1 = Content.Load<TiledMap>("map1");
@@ -100,6 +97,9 @@ namespace Escape_The_Tower
 
             recttable = new Rectangle(730, 590, 70, 45);
 
+            _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
+            _positionPlaque1 = new Vector2(1120, 290);
+            _positionPlaque2 = new Vector2(1055, 545);
 
             PersoDroite._positionPerso = new Vector2(942, 705);
             PersoGauche._positionPerso = new Vector2(428, 700);
@@ -163,11 +163,6 @@ namespace Escape_The_Tower
                
                 _myGame.Etat = Game1.Etats.Map2;
             }
-
-
-            //Console.WriteLine(PersoDroite._positionPerso.X + " " + PersoDroite._positionPerso.Y);
-            //PersoDroite._perso2.Update(deltaTime);
-
 
 
         }

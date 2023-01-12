@@ -20,12 +20,13 @@ namespace Escape_The_Tower
         private readonly ScreenManager _screenManager;
         private readonly MenuDemarage _fondMenu;
         private Map1 _ScreenMap1;
+        private Map2 _ScreenMap2;
         private MenuControle _ScreenControle;
 
         private GraphicsDeviceManager _graphics;
         public const int LONGUEUR_ECRAN = 1440;
         public const int LARGEUR_ECRAN = 800;
-        public enum Etats { Menu, Jouer, Controle, Quit, Map1, Map11, Map2};
+        public enum Etats { Menu, Jouer, Controle, Quit, Map1, Map11, Map2, Map22};
 
         // on définit un champ pour stocker l'état en cours du jeu
         private Etats etat;
@@ -45,6 +46,7 @@ namespace Escape_The_Tower
             _fondMenu = new MenuDemarage(this);
             _ScreenMap1 = new Map1(this);
             _ScreenControle = new MenuControle(this);
+            _ScreenMap2 = new Map2(this);
 
             Components.Add(_screenManager);
         }
@@ -146,13 +148,21 @@ namespace Escape_The_Tower
                     _screenManager.LoadScreen(_fondMenu, new FadeTransition(GraphicsDevice, Color.Black));
             }
 
-            if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D1))
+            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                _screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
+
+            if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 _screenManager.LoadScreen(_ScreenMap1, new FadeTransition(GraphicsDevice, Color.Black));
                  this.Etat = Etats.Map11;
 
             }
 
+            if (this.Etat == Etats.Map2 || Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                _screenManager.LoadScreen(_ScreenMap2, new FadeTransition(GraphicsDevice, Color.Black));
+                this.Etat = Etats.Map22;
+            }
             base.Update(gameTime);
             // TODO: Add your update logic here
 

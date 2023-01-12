@@ -53,8 +53,13 @@ namespace Escape_The_Tower
         public static Rectangle rectPorte2;
 
         public static Rectangle recttable;
+        public static Rectangle recttable2;
+
 
         public static bool porteouverte = false;
+        public static bool porteouverte2 = false;
+        public static bool plaque = false;
+
 
         public static AnimatedSprite _feu;
         public static Vector2 _positionfeu;
@@ -72,11 +77,26 @@ namespace Escape_The_Tower
         public static Rectangle rectfeu6;
         public static Rectangle rectfeu7;
 
+        public static Vector2 _positionfeu8;
+        public static Vector2 _positionfeu9;
+        public static Vector2 _positionfeu10;
+        public static Vector2 _positionfeu11;
+        public static Vector2 _positionfeu12;
+        public static Rectangle rectfeu8;
+        public static Rectangle rectfeu9;
+        public static Rectangle rectfeu10;
+        public static Rectangle rectfeu11;
+        public static Rectangle rectfeu12;
+
         public static Texture2D _texturePlaque;
         public static Vector2 _positionPlaque1;
         public static Vector2 _positionPlaque2;
         public static Rectangle rectPlaque1;
         public static Rectangle rectPlaque2;
+
+        public static Rectangle recescalier1;
+        public static Rectangle recescalier2;
+
 
 
         public Map2(Game1 myGame) : base(myGame)
@@ -102,9 +122,9 @@ namespace Escape_The_Tower
 
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
             _positionPlaque1 = new Vector2(1024, 224);
-            _positionPlaque2 = new Vector2(1055, 545);
-            rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
-            rectPlaque1 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
+            _positionPlaque2 = new Vector2(384, 415);
+            rectPlaque1 = new Rectangle(1024, 224, 32, 32);
+            rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
 
             //Perso
             PersoDroite._positionPerso = new Vector2(1200, 140);
@@ -128,6 +148,7 @@ namespace Escape_The_Tower
             rectPorte2 = new Rectangle((int)_positionPorte2.X, (int)_positionPorte2.Y, 32, 64);
 
             recttable = new Rectangle(1150, 190, 64, 32);
+            recttable2 = new Rectangle(150, 210, 32, 64);
 
             SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
 
@@ -139,6 +160,17 @@ namespace Escape_The_Tower
             _positionfeu5 = new Vector2(210, 540);
             _positionfeu6 = new Vector2(180, 540);
             _positionfeu7 = new Vector2(140, 540);
+
+            _positionfeu8 = new Vector2(720, 100);
+            _positionfeu9 = new Vector2(720, 130);
+            _positionfeu10 = new Vector2(720, 160);
+            _positionfeu11 = new Vector2(720, 190);
+            _positionfeu12 = new Vector2(720, 220);
+
+            recescalier1 = new Rectangle(150,330, 64, 64);
+            recescalier2 = new Rectangle(150, 90, 64, 64);
+
+
 
             base.LoadContent();
         }
@@ -155,13 +187,65 @@ namespace Escape_The_Tower
             rectfeu6 = new Rectangle((int)_positionfeu6.X, (int)_positionfeu6.Y, 48, 64);
             rectfeu7 = new Rectangle((int)_positionfeu7.X, (int)_positionfeu7.Y, 48, 64);
 
+            rectfeu8 = new Rectangle((int)_positionfeu8.X, (int)_positionfeu8.Y, 48, 64);
+            rectfeu9 = new Rectangle((int)_positionfeu9.X, (int)_positionfeu9.Y, 48, 64);
+            rectfeu10 = new Rectangle((int)_positionfeu10.X, (int)_positionfeu10.Y, 48, 64);
+            rectfeu11 = new Rectangle((int)_positionfeu11.X, (int)_positionfeu11.Y, 48, 64);
+            rectfeu12 = new Rectangle((int)_positionfeu12.X, (int)_positionfeu12.Y, 48, 64);
+
+
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
 
+            if (Collision(rectfeu8, rectPerso2) || Collision(rectfeu9, rectPerso2) || Collision(rectfeu10, rectPerso2) || Collision(rectfeu11, rectPerso2) || Collision(rectfeu12, rectPerso2) )
+            {
+                    PersoDroite._positionPerso = new Vector2(1200, 140);
+
+            }
+
+            if (!Collision(rectPlaque2, rectPerso1))
+            {
+                plaque = false;
+            }
+
+            if (plaque == false)
+            {
+                _positionfeu8 = new Vector2(720, 100);
+                _positionfeu9 = new Vector2(720, 130);
+                _positionfeu10 = new Vector2(720, 160);
+                _positionfeu11 = new Vector2(720, 190);
+                _positionfeu12 = new Vector2(720, 220);
+            }
+
+            if (Collision(rectPlaque2,rectPerso1))
+            {
+                plaque = true;
+            }
+
+            if (plaque == true)
+            {
+                _positionfeu8 = new Vector2(430, 100);
+                _positionfeu9 = new Vector2(430, 130);
+                _positionfeu10 = new Vector2(430, 160);
+                _positionfeu11 = new Vector2(430, 190);
+                _positionfeu12 = new Vector2(430, 220);
+            }
+
+
+
+            if (Collision(rectPlaque1, rectPerso2))
+            {
+                porteouverte = true;
+            }
 
             if (Collision(rectPorte, rectPerso2) && porteouverte == false)
             {
                 PersoDroite._positionPerso.X = PersoDroite._positionPerso.X +5;
+            }
+
+            if (Collision(rectPorte2, rectPerso1) && porteouverte2 == false)
+            {
+                PersoGauche._positionPerso.X = PersoGauche._positionPerso.X + 5;
             }
 
             if (Collision(recttable, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
@@ -174,6 +258,17 @@ namespace Escape_The_Tower
                 _positionfeu5 = new Vector2(1000, 1000);
                 _positionfeu6 = new Vector2(1000, 1000);
                 _positionfeu7 = new Vector2(1000, 1000);
+
+            }
+
+            if (Collision(recttable2, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
+            {
+                porteouverte2 = true;
+            }
+
+            if (porteouverte2 == true)
+            {
+                _texturePorte2 = _texturePorteOuverte2;
 
             }
 
@@ -190,12 +285,11 @@ namespace Escape_The_Tower
 
 
 
-            if (Collision(rectPlaque1, rectPerso2))
+            if (Collision(recescalier1, rectPerso1) && Collision(recescalier2, rectPerso2))
             {
-                porteouverte = true;
-                Console.WriteLine("test");
+                Console.WriteLine("oui");
+                //_myGame.Etat = Game1.Etats.Map3;
             }
-
 
 
 
@@ -222,6 +316,13 @@ namespace Escape_The_Tower
             _myGame.SpriteBatch.Draw(_feu, _positionfeu5);
             _myGame.SpriteBatch.Draw(_feu, _positionfeu6);
             _myGame.SpriteBatch.Draw(_feu, _positionfeu7);
+
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu8);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu9);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu10);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu11);
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu12);
+
 
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque2, Color.White);

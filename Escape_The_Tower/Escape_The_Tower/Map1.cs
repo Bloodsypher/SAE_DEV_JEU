@@ -35,11 +35,20 @@ namespace Escape_The_Tower
 
         public static Texture2D _textutePorte;
         public static Texture2D _textutePorteOuverte;
+        public static Vector2 _positionPorte;
+        public static Rectangle rectPorte;
+
+        public static Rectangle recttable;
+
 
         public static Rectangle rectPerso1;
         public static Rectangle rectPerso2;
         public static int sprite_width;
         public static int sprite_height;
+
+
+        public static bool porteouverte = false;
+
 
         public Map1(Game1 myGame) : base(myGame)
         {
@@ -64,14 +73,19 @@ namespace Escape_The_Tower
             //définition des layers 
             mapLayerCollision1 = _tiledMap1.GetLayer<TiledMapTileLayer>("collision1");
 
-            //définition des textures obj
+            //définition des obj
             _textutePorte = Content.Load<Texture2D>("porte1");
             _textutePorteOuverte = Content.Load<Texture2D>("porte4");
+            _positionPorte = new Vector2(223, 190);
+            rectPorte = new Rectangle((int)_positionPorte.X, (int)_positionPorte.Y, 64, 32);
+
+            recttable = new Rectangle(730, 590, 70, 45);
+
 
             PersoDroite._positionPerso = new Vector2(942, 705);
             PersoGauche._positionPerso = new Vector2(428, 700);
 
-            PersoDroite.mapJoueur2 = _tiledMap1;
+            PersoDroite.mapJoueur2   = _tiledMap1;
             PersoDroite.mapPlayer2 = mapLayerCollision1;
             PersoGauche.mapJoueur1 = _tiledMap1;
             PersoGauche.mapPlayer1 = mapLayerCollision1;
@@ -89,7 +103,29 @@ namespace Escape_The_Tower
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
 
 
-            PersoDroite._perso2.Update(deltaTime);
+            if (Collision(rectPorte, rectPerso1) && !porteouverte)
+            {
+                PersoGauche._positionPerso.Y = PersoGauche._positionPerso.Y + 5;
+            }
+
+
+            if (Collision(recttable, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
+            {
+                porteouverte = true;
+
+            }
+
+            if (porteouverte)
+            {
+                _textutePorte = _textutePorteOuverte;
+                if (Collision(rectPorte, rectPerso2))
+                {
+                    PersoDroite._positionPerso.Y = PersoDroite._positionPerso.Y - 5;
+                }
+            }
+
+            Console.WriteLine(PersoDroite._positionPerso.X + " " + PersoDroite._positionPerso.Y);
+            //PersoDroite._perso2.Update(deltaTime);
 
 
 
@@ -102,11 +138,20 @@ namespace Escape_The_Tower
 
             _myGame.SpriteBatch.Begin();
 
+            _myGame.SpriteBatch.Draw(_textutePorte, _positionPorte, Color.White);
+
+
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);
 
             _myGame.SpriteBatch.End();
 
+
+        }
+
+        public static bool Collision(Rectangle rectPlaque1, Rectangle rectPerso1)
+        {
+            return rectPerso1.Intersects(rectPlaque1);
 
         }
     }

@@ -59,7 +59,7 @@ namespace Escape_The_Tower
             _tiledMap2 = Content.Load<TiledMap>("Map2LF");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap2);
 
-            mapLayerCollision2 = _tiledMap2.GetLayer<TiledMapTileLayer>("mur2");
+            mapLayerCollision2 = _tiledMap2.GetLayer<TiledMapTileLayer>("Mur2");
 
             //Perso
             PersoDroite._positionPerso = new Vector2(942, 705);

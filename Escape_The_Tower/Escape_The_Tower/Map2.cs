@@ -123,7 +123,7 @@ namespace Escape_The_Tower
             _texturePlaque = Content.Load<Texture2D>("plaque_de_pression");
             _positionPlaque1 = new Vector2(1024, 224);
             _positionPlaque2 = new Vector2(384, 415);
-            rectPlaque1 = new Rectangle(1024, 224, 32, 32);
+            rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
             rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
 
             //Perso
@@ -231,7 +231,7 @@ namespace Escape_The_Tower
                 _positionfeu12 = new Vector2(430, 220);
             }
 
-
+            //porte
 
             if (Collision(rectPlaque1, rectPerso2))
             {

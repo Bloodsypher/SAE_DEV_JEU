@@ -287,8 +287,8 @@ namespace Escape_The_Tower
 
             if (Collision(recescalier1, rectPerso1) && Collision(recescalier2, rectPerso2))
             {
-       
-                _myGame.Etat = Game1.Etats.Fin;
+
+                _myGame.Etat = Game1.Etats.Map3;
             }
 
 

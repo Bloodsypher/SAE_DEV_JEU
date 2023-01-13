@@ -73,6 +73,12 @@ namespace Escape_The_Tower
 
         public static bool plaque = false;
 
+        public static AnimatedSprite _feu;
+        public static Vector2 _positionfeu;
+        public bool _boolfeu;
+        public static Vector2[] _positionfeuTableau = new Vector2[2];
+        public static Rectangle rectfeu;
+
         public Map3(Game1 myGame) : base(myGame)
         {
             this._myGame = myGame;
@@ -82,11 +88,14 @@ namespace Escape_The_Tower
         {
 
 
-
         }
 
         public override void LoadContent()
         {
+            _positionfeuTableau[0] = new Vector2(690, 250);
+            _positionfeuTableau[1] = new Vector2(810, 250);
+            _positionfeu = _positionfeuTableau[0];
+            _boolfeu = true;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap3 = Content.Load<TiledMap>("MapFinal");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap3);
@@ -129,6 +138,9 @@ namespace Escape_The_Tower
             PersoGauche.mapJoueur1 = _tiledMap3;
             PersoGauche.mapPlayer1 = mapLayerCollision3;
 
+            SpriteSheet spriteSheetfeu = Content.Load<SpriteSheet>("fire.sf", new JsonContentLoader());
+            _feu = new AnimatedSprite(spriteSheetfeu);
+
 
             base.LoadContent();
         }
@@ -137,6 +149,20 @@ namespace Escape_The_Tower
         {
             float deltaTime = (float)gametime.ElapsedGameTime.TotalSeconds;
 
+            rectfeu = new Rectangle((int)_positionfeu.X, (int)_positionfeu.Y, 48, 64);
+
+            if (_boolfeu)
+            {
+                _positionfeu += Vector2.Normalize(_positionfeuTableau[1] - _positionfeu);
+                Console.WriteLine("se deplace vers pos 1");
+            }
+            else if (!_boolfeu)
+                _positionfeu += Vector2.Normalize(_positionfeuTableau[0] - _positionfeu);
+
+            if (_positionfeu == _positionfeuTableau[1])
+                _boolfeu = false;
+            else if (_positionfeu == _positionfeuTableau[0])
+                _boolfeu = true;
 
             rectPerso1 = new Rectangle((int)PersoGauche._positionPerso.X, (int)PersoGauche._positionPerso.Y, sprite_width, sprite_height);
             rectPerso2 = new Rectangle((int)PersoDroite._positionPerso.X, (int)PersoDroite._positionPerso.Y, sprite_width, sprite_height);
@@ -203,6 +229,22 @@ namespace Escape_The_Tower
             {
                 _myGame.Etat = Game1.Etats.Fin;
             }
+
+
+            if (Collision(rectfeu, rectPerso1))
+            {
+                PersoGauche._positionPerso = new Vector2(200, 610);
+               
+            }
+
+            if (Collision(rectfeu, rectPerso2))
+            {
+                PersoDroite._positionPerso = new Vector2(1200, 640);
+
+            }
+
+            _feu.Play("fire");
+            _feu.Update(deltaTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -218,6 +260,9 @@ namespace Escape_The_Tower
 
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque1, Color.White);
             _myGame.SpriteBatch.Draw(_texturePlaque, _positionPlaque2, Color.White);
+
+            _myGame.SpriteBatch.Draw(_feu, _positionfeu);
+
 
             PersoGauche.Draw(_myGame.SpriteBatch);
             PersoDroite.Draw(_myGame.SpriteBatch);

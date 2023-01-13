@@ -91,13 +91,12 @@ namespace Escape_The_Tower
             //MODE PLEINE ECRAN
             //---------------------------
 
-            //int w = graphics.DisplayMode.Width;
-            //int h = graphics.DisplayMode.Height;
+            
             _graphics.PreferredBackBufferWidth = LONGUEUR_ECRAN;
             _graphics.PreferredBackBufferHeight = LARGEUR_ECRAN;
 
 
-            //_graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             PersoGauche.Initialize();

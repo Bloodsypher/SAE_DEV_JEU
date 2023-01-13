@@ -153,7 +153,10 @@ namespace Escape_The_Tower
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
                 _screenManager.LoadScreen(_ScreenMapTuto, new FadeTransition(GraphicsDevice, Color.Black));
+               
+            }
 
             if (this.Etat == Etats.Map1 || Keyboard.GetState().IsKeyDown(Keys.D2))
             {

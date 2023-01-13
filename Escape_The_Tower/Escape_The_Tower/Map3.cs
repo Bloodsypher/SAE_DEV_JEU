@@ -62,7 +62,10 @@ namespace Escape_The_Tower
         public static Rectangle rectPlaque1;
         public static Rectangle rectPlaque2;
 
+        public static Rectangle rectable2;
+        public static Rectangle rectable;
 
+        public static Rectangle recescalier;
 
         public static bool porteouverte = false;
         public static bool porteouverte2 = false;
@@ -111,6 +114,11 @@ namespace Escape_The_Tower
             _positionPlaque1 = new Vector2(128, 608);
             rectPlaque1 = new Rectangle((int)_positionPlaque1.X, (int)_positionPlaque1.Y, 32, 32);
             rectPlaque2 = new Rectangle((int)_positionPlaque2.X, (int)_positionPlaque2.Y, 32, 32);
+
+            rectable = new Rectangle(450,310, 64, 32);
+            rectable2 = new Rectangle(1060, 310, 64, 32);
+
+            recescalier = new Rectangle(700, 80,64, 64);
 
             //perso
             PersoDroite._positionPerso = new Vector2(1200, 640);
@@ -169,6 +177,32 @@ namespace Escape_The_Tower
                 }
             }
 
+            if (porteouverte == true)
+            {
+                _texturePorte = _texturePorteOuverte;
+                
+            }
+
+            if (Collision(rectable2, rectPerso2) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
+            {
+                porteouverte = true;
+            }
+
+            if (Collision(rectable, rectPerso1) && Keyboard.GetState().IsKeyDown(Keys.F))
+            {
+                porteouverte3 = true;
+            }
+
+            if (porteouverte3 == true)
+            {
+                _texturePorte3 = _texturePorteOuverte;
+
+            }
+
+            if (Collision(recescalier, rectPerso1) && Collision(recescalier, rectPerso2))
+            {
+                _myGame.Etat = Game1.Etats.Fin;
+            }
         }
 
         public override void Draw(GameTime gameTime)
